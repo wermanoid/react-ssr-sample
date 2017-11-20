@@ -1,7 +1,16 @@
 // @flow
+/* eslint global-require: 0 */
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 
 import App from '#components/App';
 
-render(<App />, document.getElementById('root'));
+hydrate(<App />, document.getElementById('react-root'));
+
+if (process.env.NODE_ENV === 'develop' && module.hot) {
+  console.warn('hot reload enabled', process.env.NODE_ENV, module.hot);
+  module.hot.accept('#components/App', () => {
+    const NewApp = require('#components/App').default;
+    hydrate(<NewApp />, document.getElementById('react-root'));
+  });
+}

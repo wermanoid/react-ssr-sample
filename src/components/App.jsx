@@ -4,7 +4,7 @@ import React from 'react';
 const App = () => (
   <div>
     <span>
-      simplest SSR sample
+      simplest SSR with HMR
     </span>
   </div>
 );

@@ -1,5 +1,9 @@
 import path from 'path';
-import { HotModuleReplacementPlugin } from 'webpack';
+import {
+  HotModuleReplacementPlugin,
+  NoEmitOnErrorsPlugin,
+  EnvironmentPlugin,
+} from 'webpack';
 import resolver from './webpack.config.resolve';
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
@@ -15,6 +19,7 @@ export default () => ({
   output: {
     path: DIST_DIR,
     filename: '[name].bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -22,10 +27,17 @@ export default () => ({
         test: /.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        query: {
+          presets: ['react-hmre'],
+        },
       },
     ],
   },
   plugins: [
+    new EnvironmentPlugin({
+      NODE_ENV: 'develop',
+    }),
     new HotModuleReplacementPlugin(),
+    new NoEmitOnErrorsPlugin(),
   ],
 });

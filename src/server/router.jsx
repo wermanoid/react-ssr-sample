@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import App from '../components/App';
+import App from '#components/App';
 
 export default (req, res) => {
   console.log(req.url);
@@ -17,7 +17,7 @@ export default (req, res) => {
         <title>Isomorphic Redux Demo</title>
       </head>
       <body>
-        <div id="react-view">${html}</div>
+        <div id="react-root">${html}</div>
         <script type="application/javascript" src="main.bundle.js"></script>
       </body>
     </html>
