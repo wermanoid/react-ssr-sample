@@ -18,6 +18,13 @@ export default (req, res) => {
   );
   const html = renderToString(content);
 
+  if (context.url) {
+    res.writeHead(301, {
+      Location: context.url,
+    });
+    return res.end();
+  }
+
   const HTML = `
     <!DOCTYPE html>
     <html>
