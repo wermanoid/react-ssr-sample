@@ -1,15 +1,27 @@
 // @flow
 /* eslint global-require: 0 */
 import React from 'react';
+import { Provider } from 'react-redux';
 import { hydrate } from 'react-dom';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 import Routes from '#components/Routes';
+import App from '#components/App';
+
+import configureStore from './store';
+
+const history = createHistory();
+const store = configureStore({}, history);
 
 const renderApp = (Component: React$Class) =>
   hydrate(
-    <BrowserRouter>
-      <Component />
-    </BrowserRouter>,
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App>
+          <Component />
+        </App>
+      </ConnectedRouter>
+    </Provider>,
     document.getElementById('react-root'),
   );
 

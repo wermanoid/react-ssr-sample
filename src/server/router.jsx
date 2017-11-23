@@ -1,20 +1,23 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import StaticRouter from 'react-router/StaticRouter';
-// import App from '#components/App';
+import { Provider } from 'react-redux';
+import App from '#components/App';
 import Routes from '#components/Routes';
+import configureStore from '#store';
+
+const store = configureStore();
 
 export default (req, res) => {
-  // console.log(req.url);
-  // if (req.url !== '/') {
-  //   return res.status(404).end('Not found.');
-  // }
-  // const html = renderToString(<App />);
   const context = {};
   const content = (
-    <StaticRouter location={req.url} context={context}>
-      <Routes />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <App>
+          <Routes />
+        </App>
+      </StaticRouter>
+    </Provider>
   );
   const html = renderToString(content);
 

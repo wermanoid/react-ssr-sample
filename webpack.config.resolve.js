@@ -11,6 +11,7 @@ module.exports = {
     alias: {
       '#public': path.join(__dirname, 'public'),
       '#app': path.join(__dirname, 'src'),
+      '#store': path.join(__dirname, 'src/store'),
       '#env': path.join(__dirname, 'src/environment'),
       '#containers': path.join(__dirname, 'src/containers'),
       '#components': path.join(__dirname, 'src/components'),
