@@ -8,7 +8,8 @@ export default (html: string) => `
     </head>
     <body>
       <div id="react-root">${html}</div>
-      <script type="application/javascript" src="main.bundle.js"></script>
+      <script type="application/javascript" src="public/vendor.bundle.js"></script>
+      <script type="application/javascript" src="public/main.bundle.js"></script>
     </body>
   </html>
 `;

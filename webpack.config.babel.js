@@ -3,23 +3,27 @@ import {
   HotModuleReplacementPlugin,
   NoEmitOnErrorsPlugin,
   EnvironmentPlugin,
+  optimize,
 } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import resolver from './webpack.config.resolve';
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
+const SRC_DIR = path.resolve(__dirname, 'src');
 
 export default () => ({
   ...resolver,
+  context: SRC_DIR,
+  target: 'web',
+  devtool: 'source-map',
   entry: [
-    // 'webpack-dev-server/client?http://127.0.0.1:8080/',
-    // 'webpack/hot/only-dev-server',
     'webpack-hot-middleware/client?reload=true',
-    './src/index.jsx',
+    `${SRC_DIR}/index.jsx`,
   ],
   output: {
     path: DIST_DIR,
     filename: '[name].bundle.js',
-    publicPath: '/',
+    publicPath: '/public/',
   },
   module: {
     rules: [
@@ -39,5 +43,12 @@ export default () => ({
     }),
     new HotModuleReplacementPlugin(),
     new NoEmitOnErrorsPlugin(),
+    new optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks(module) {
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      },
+    }),
+    ...(process.env.NODE_ENV === 'analyse' && [new BundleAnalyzerPlugin()]),
   ],
 });

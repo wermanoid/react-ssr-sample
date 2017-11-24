@@ -6,8 +6,9 @@
   "scripts": {
     "test": "test",
     "start": "NODE_ENV=develop nodemon src/server/index.js --exec babel-node --watch src/server --ext js,jsx --",
-    "dev": "npm run start && webpack-dev-server --progress --color",
-    "lint": "eslint ./src/* --ext js --ext jsx"
+    "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
+    "lint": "eslint ./src/* --ext js --ext jsx",
+    "analyse": "NODE_ENV=analyse webpack --config webpack.config.babel.js -p"
   },
   "keywords": [
     "react",
@@ -55,6 +56,7 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "webpack": "^3.8.1",
+    "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0"
   },

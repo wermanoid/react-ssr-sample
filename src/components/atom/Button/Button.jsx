@@ -2,7 +2,7 @@
 import React from 'react';
 
 const Button = () => (
-  <button>sample 22s</button>
+  <button>sample</button>
 );
 
 export default Button;

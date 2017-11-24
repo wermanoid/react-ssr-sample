@@ -7,7 +7,9 @@ import Sample from '#page/Sample';
 import NotFound from '#page/NotFound';
 import App from '#components/App';
 
-const ConnectedSwitch = connect(state => ({ location: state.location }))(Switch);
+const switchMapState = ({ location }) => ({ location });
+
+const ConnectedSwitch = connect(switchMapState)(Switch);
 
 const Routes = () => (
   <App>

@@ -7,9 +7,8 @@ import configureStore from '#store';
 
 import indexTemplate from './index.tmpl';
 
-const store = configureStore();
-
 export default (req, res) => {
+  const store = configureStore();
   const context = {};
   const content = (
     <Provider store={store}>
