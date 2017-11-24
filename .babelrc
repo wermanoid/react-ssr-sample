@@ -2,6 +2,7 @@
   "presets": ["env", "react", "stage-0", "flow"],
   "plugins": [
     "lodash",
-    [ "babel-plugin-webpack-alias", { "config": "./webpack.config.resolve.js" } ]
+    [ "babel-plugin-webpack-alias", { "config": "./webpack.config.resolve.js" } ],
+    "dynamic-import-webpack"
   ],
 }
