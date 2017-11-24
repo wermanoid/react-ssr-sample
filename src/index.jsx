@@ -6,7 +6,6 @@ import { hydrate } from 'react-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import Routes from '#components/Routes';
-import App from '#components/App';
 
 import configureStore from './store';
 
@@ -17,9 +16,7 @@ const renderApp = (Component: React$Class) =>
   hydrate(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <App>
-          <Component />
-        </App>
+        <Component />
       </ConnectedRouter>
     </Provider>,
     document.getElementById('react-root'),
