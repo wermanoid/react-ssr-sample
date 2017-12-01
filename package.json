@@ -8,7 +8,9 @@
     "start": "NODE_ENV=develop nodemon src/server/index.js --exec babel-node --watch src/server --ext js,jsx --",
     "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
     "lint": "eslint ./src/* --ext js --ext jsx",
-    "analyze": "NODE_ENV=analyze webpack --config webpack.config.babel.js -p"
+    "analyze": "NODE_ENV=analyze webpack --config webpack.config.babel.js -p",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [
     "react",
@@ -17,6 +19,10 @@
   "author": "Alex Werman",
   "license": "ISC",
   "devDependencies": {
+    "@storybook/addon-actions": "^3.2.16",
+    "@storybook/addon-knobs": "^3.2.16",
+    "@storybook/addon-links": "^3.2.16",
+    "@storybook/react": "^3.2.16",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
