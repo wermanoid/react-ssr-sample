@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
     "lint": "eslint ./src/* --ext js --ext jsx",
     "analyze": "NODE_ENV=analyze webpack --config webpack.config.babel.js -p",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 9001",
     "build-storybook": "build-storybook"
   },
   "keywords": [
@@ -19,10 +19,6 @@
   "author": "Alex Werman",
   "license": "ISC",
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.16",
-    "@storybook/addon-knobs": "^3.2.16",
-    "@storybook/addon-links": "^3.2.16",
-    "@storybook/react": "^3.2.16",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
@@ -52,6 +48,10 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "@storybook/addon-actions": "^3.2.16",
+    "@storybook/addon-knobs": "^3.2.16",
+    "@storybook/addon-links": "^3.2.16",
+    "@storybook/react": "^3.2.16",
     "express": "^4.16.2",
     "history": "^4.7.2",
     "loadable-components": "^0.3.0",
