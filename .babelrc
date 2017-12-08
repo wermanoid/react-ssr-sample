@@ -2,7 +2,17 @@
   "presets": ["env", "react", "stage-0", "flow"],
   "plugins": [
     "lodash",
+    ["babel-plugin-styled-components", { "ssr": true }],
     [ "babel-plugin-webpack-alias", { "config": "./webpack.config.resolve.js" } ],
     "dynamic-import-webpack"
   ],
+  "env": {
+    "test": {
+      "presets": ["env", "react", "stage-0", "flow"],
+      "plugins":[
+        ["babel-plugin-styled-components", { "ssr": true }],
+        [ "babel-plugin-webpack-alias", { "config": "./webpack.config.resolve.js" } ],
+      ],
+    }
+  }
 }
