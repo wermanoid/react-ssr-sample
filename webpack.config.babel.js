@@ -2,6 +2,7 @@ import path from 'path';
 import {
   HotModuleReplacementPlugin,
   NoEmitOnErrorsPlugin,
+  NamedModulesPlugin,
   EnvironmentPlugin,
   optimize,
 } from 'webpack';
@@ -15,13 +16,12 @@ export default () => ({
   ...resolver,
   context: SRC_DIR,
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     client: [
       ...(process.env.NODE_ENV !== 'production' && ['webpack-hot-middleware/client?reload=true']),
       `${SRC_DIR}/index.jsx`,
     ],
-    vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux', 'material-ui'],
   },
   output: {
     path: DIST_DIR,
@@ -44,18 +44,19 @@ export default () => ({
     new EnvironmentPlugin({
       NODE_ENV: 'develop',
     }),
+    new NamedModulesPlugin(),
     new HotModuleReplacementPlugin(),
     new NoEmitOnErrorsPlugin(),
-    new optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
     // new optimize.CommonsChunkPlugin({
     //   name: 'vendor',
-    //   minChunks(module) {
-    //     return module.context && module.context.indexOf('node_modules') !== -1;
-    //   },
+    //   minChunks: Infinity,
     // }),
+    new optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks(module) {
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      },
+    }),
     new optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity,

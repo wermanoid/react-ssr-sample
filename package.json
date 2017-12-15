@@ -11,7 +11,7 @@
     "analyze": "NODE_ENV=analyze webpack --config webpack.config.babel.js -p",
     "storybook": "start-storybook -p 9001",
     "build-storybook": "build-storybook",
-    "tdd": "jest --colors --watch --notify "
+    "tdd": "jest --colors --watch --notify"
   },
   "keywords": [
     "react",
@@ -64,12 +64,14 @@
     "loadable-components": "^0.3.0",
     "lodash": "^4.17.4",
     "material-ui": "^1.0.0-beta.21",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
+    "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "styled-components": "^2.2.4",

@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import App from '#components/App';
 import * as Pages from './loader';
 
-const switchMapState = ({ location }) => ({ location });
+const switchMapState: MapStateToProps<*, *, *> = ({ location }) => ({ location });
 
-const ConnectedSwitch = connect(switchMapState, null)(Switch);
+const ConnectedSwitch = connect(switchMapState)(Switch);
 
 const Routes = () => (
   <ThemeProvider theme={{}}>

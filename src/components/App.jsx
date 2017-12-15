@@ -9,7 +9,7 @@ type PropsType = {
 const App = ({ children }: PropsType) => (
   <div>
     <span>
-      simplest SSR with HMR
+      simplest SSR with HMRn2
       <Button />
     </span>
     { children }

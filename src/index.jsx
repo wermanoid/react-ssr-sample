@@ -12,7 +12,7 @@ import configureStore from './store';
 const history = createHistory();
 const store = configureStore({}, history);
 
-const renderApp = (Component: React$Class) =>
+const renderApp = (Component: React$ComponentType<*>) =>
   hydrate(
     <Provider store={store}>
       <ConnectedRouter history={history}>
