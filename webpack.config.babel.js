@@ -18,8 +18,9 @@ export default () => ({
   devtool: 'source-map',
   entry: {
     client: [
+      'react-hot-loader/patch',
       ...(process.env.NODE_ENV !== 'production' && ['webpack-hot-middleware/client?reload=true']),
-      `${SRC_DIR}/index.jsx`,
+      `${SRC_DIR}/index.tsx`,
     ],
     vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux', 'material-ui'],
   },
@@ -31,12 +32,13 @@ export default () => ({
   module: {
     rules: [
       {
-        test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['react-hmre'],
-        },
+        test: /.(tsx)?$/,
+        loaders: [
+          'react-hot-loader/webpack',
+          'awesome-typescript-loader',
+        ],
+        exclude: path.resolve(__dirname, 'node_modules'),
+        include: path.resolve(__dirname, 'src'),
       },
     ],
   },

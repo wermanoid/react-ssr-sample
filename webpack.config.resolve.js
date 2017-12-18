@@ -7,7 +7,7 @@ const path = require('path');
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.jsx'],
     alias: {
       '#public': path.join(__dirname, 'public'),
       '#app': path.join(__dirname, 'src'),

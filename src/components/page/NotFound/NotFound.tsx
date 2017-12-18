@@ -7,10 +7,10 @@ const Page404 = () => (
     <h1>404 : Not Found!</h1>
   </div>
 );
-
-Page404.defaultProps = {
-  staticContext: {},
-};
+//
+// Page404.defaultProps = {
+//   staticContext: {},
+// };
 
 const NotFound = () => <Route render={Page404} />;
 export default NotFound;

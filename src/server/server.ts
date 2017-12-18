@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 import express from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';

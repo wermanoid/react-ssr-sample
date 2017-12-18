@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '#atom/Button';
 
 type PropsType = {
-  children: React$Node,
+  children: any,
 }
 
 const App = ({ children }: PropsType) => (

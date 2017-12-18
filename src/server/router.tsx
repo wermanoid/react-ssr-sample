@@ -9,7 +9,7 @@ import indexTemplate from './index.tmpl';
 
 export default (req, res) => {
   const store = configureStore();
-  const context = {};
+  const context: any = {};
   const content = (
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>

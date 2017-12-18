@@ -1,9 +1,9 @@
-// @flow
 /* eslint global-require: 0 */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { hydrate } from 'react-dom';
 import { ConnectedRouter } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createBrowserHistory';
 import Routes from '#components/Routes';
 
@@ -12,13 +12,15 @@ import configureStore from './store';
 const history = createHistory();
 const store = configureStore({}, history);
 
-const renderApp = (Component: React$Class) =>
+const renderApp = (Component: any) =>
   hydrate(
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Component />
-      </ConnectedRouter>
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Component />
+        </ConnectedRouter>
+      </Provider>
+    </AppContainer>,
     document.getElementById('react-root'),
   );
 
