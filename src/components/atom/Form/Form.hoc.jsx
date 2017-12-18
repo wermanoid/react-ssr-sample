@@ -1,18 +1,11 @@
 // @flow
 import React, { PureComponent } from 'react';
 import Props from 'prop-types';
-
-type FormControlType = Object;
-
-type AsFormStateType = {
-  controls: FormControlType[],
-};
-
-type AsFormPropsType = {
-  array?: boolean,
-  validators?: Function[],
-  name?: string,
-};
+import type {
+  FormControlType,
+  AsFormPropsType,
+  AsFormStateType,
+} from './types';
 
 export const FormContextType = {
   register: Props.func,
@@ -27,26 +20,38 @@ export default (Wrapped: React$ComponentType<*>) =>
     static displayName = `asForm(${Wrapped.displayName || Wrapped.name || 'Component'})`;
     static childContextTypes = FormContextType;
 
-    constructor(props: AsFormPropsType, ctx: Object) {
-      super(props, ctx);
-      this.state = { controls: [] };
-    }
+    state = { controls: [] };
 
     getChildContext = () => ({
-      register: (control: FormControlType, name?: string) => {
-        setTimeout(() => {
-          const { controls } = this.state;
-          const { array } = this.props;
-          this.setState({
-            controls: [...controls, array || !name ? control : { [name]: control }],
-          });
-        });
+      register: (control: FormControlType) => {
+        this.addContolsQueue.push(control);
+        this.updateControls();
       },
-      unregister: () => {},
+      unregister: (control: FormControlType) => {
+        this.remContolsQueue.push(control);
+        this.updateControls();
+      },
     });
 
     onSubmit = () => {};
     onReset = () => {};
+
+    updateControls = () => {
+      if (this.enqueueTimeoutId) {
+        clearTimeout(this.enqueueTimeoutId);
+      }
+      this.enqueueTimeoutId = setTimeout(() => {
+        const { controls } = this.state;
+        this.setState({ controls: [...controls, ...this.addContolsQueue] });
+        this.addContolsQueue = [];
+        this.enqueueTimeoutId = null;
+      });
+    };
+
+    enqueueTimeoutId: ?number = null;
+    addContolsQueue: FormControlType[] = [];
+    dequeueTimeoutId: ?number = null;
+    remContolsQueue: FormControlType[] = [];
 
     render() {
       return <Wrapped {...this.props} onSubmit={this.onSubmit} onReset={this.onReset} />;
