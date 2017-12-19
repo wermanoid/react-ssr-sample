@@ -14,10 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "*": [
-          "node_modules/*",
-          "src/types/*"
-      ],
+      "*": ["node_modules/*", "src/types/*"],
       "#public/*": ["public/*"],
       "#app/*": ["src/*"],
       "#store": ["src/store"],
@@ -29,12 +26,16 @@
       "#organism/*": ["src/components/organism/*"],
       "#page/*": ["src/components/page/*"],
       "#template/*": ["src/components/template/*"],
-      "#constants/*": ["src/constants/*"],
-  }
+      "#constants/*": ["src/constants/*"]
+    }
   },
   "lib": ["es6", "dom"],
   "exclude": ["node_modules", "**/node_modules/*"],
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"],
+  "awesomeTypescriptLoaderOptions": {
+    "useCache": true,
+    "useBabel": true,
+    "babelCore": "@babel/core",
+    "forceIsolatedModules": true
+  }
 }

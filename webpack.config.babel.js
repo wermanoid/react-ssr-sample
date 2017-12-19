@@ -5,6 +5,7 @@ import {
   EnvironmentPlugin,
   optimize,
 } from 'webpack';
+import HardSourcePlugin from 'hard-source-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import resolver from './webpack.config.resolve';
 
@@ -15,14 +16,13 @@ export default () => ({
   ...resolver,
   context: SRC_DIR,
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     client: [
       'react-hot-loader/patch',
       ...(process.env.NODE_ENV !== 'production' && ['webpack-hot-middleware/client?reload=true']),
       `${SRC_DIR}/index.tsx`,
     ],
-    vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux', 'material-ui'],
   },
   output: {
     path: DIST_DIR,
@@ -48,16 +48,13 @@ export default () => ({
     }),
     new HotModuleReplacementPlugin(),
     new NoEmitOnErrorsPlugin(),
+    new HardSourcePlugin(),
     new optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: Infinity,
+      minChunks(module) {
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      },
     }),
-    // new optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks(module) {
-    //     return module.context && module.context.indexOf('node_modules') !== -1;
-    //   },
-    // }),
     new optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity,
