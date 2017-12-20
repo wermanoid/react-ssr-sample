@@ -12,7 +12,7 @@
     "storybook": "start-storybook -p 9001",
     "build-storybook": "build-storybook",
     "tdd": "jest --colors --watch --notify ",
-    "start-ts": "NODE_ENV=develop babel-node --extensions '.js,.ts,.tsx' src/server/index.ts --"
+    "start-ts": "nodemon src/server/index.ts --config nodemon.json --"
   },
   "keywords": [
     "react",

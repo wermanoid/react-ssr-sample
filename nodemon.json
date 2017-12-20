@@ -1,9 +1,14 @@
 {
-    "delay": "0",
-    "execMap": {
-        "ts": "ts-node"
-    },
-    "events": {
-        "start": "tslint -c ./tslint.json -t stylish 'src/**/*.ts'"
-    }
+  "delay": "0",
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/**/node_modules"],
+  "inspect": true,
+  "watch": ["src/server/"],
+  "execMap": {
+    "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
+  },
+  "env": {
+    "NODE_ENV": "develop"
+  },
+  "ext": "ts tsx"
 }
