@@ -6,8 +6,8 @@ import Button from './Button';
 
 describe('<Button /> tests', () => {
   test('mount properly', () => {
-    const sut = mount(<Button onClick={null} />);
-    expect(sut).toBeDefined();
-    expect(toJson(sut)).toMatchSnapshot();
+    const tree = mount(<Button onClick={undefined} />);
+    expect(tree).toBeDefined();
+    expect(toJson(tree)).toMatchSnapshot();
   });
 });

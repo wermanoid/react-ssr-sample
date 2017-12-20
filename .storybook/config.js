@@ -5,7 +5,7 @@ const requireAll = requireContext => {
 };
 
 function loadStories() {
-  requireAll(require.context('../src/components', true, /\.story\.jsx?$/));
+  requireAll(require.context('../src/components', true, /\.story\.tsx?$/));
 }
 
 configure(loadStories, module);

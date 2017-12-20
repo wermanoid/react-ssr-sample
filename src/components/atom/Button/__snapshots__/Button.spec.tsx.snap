@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Button /> tests mount properly 1`] = `
-<Button
-  onClick={null}
->
-  <withStyles(Button)
-    onClick={null}
-  >
+<Button>
+  <withStyles(Button)>
     <Button
       classes={
         Object {
@@ -19,6 +15,7 @@ exports[`<Button /> tests mount properly 1`] = `
           "flatPrimary": "MuiButton-flatPrimary-4",
           "keyboardFocused": "MuiButton-keyboardFocused-9",
           "label": "MuiButton-label-3",
+          "mini": "MuiButton-mini-15",
           "raised": "MuiButton-raised-8",
           "raisedAccent": "MuiButton-raisedAccent-11",
           "raisedContrast": "MuiButton-raisedContrast-12",
@@ -32,7 +29,7 @@ exports[`<Button /> tests mount properly 1`] = `
       disableRipple={false}
       disabled={false}
       fab={false}
-      onClick={null}
+      mini={false}
       raised={false}
       type="button"
     >
@@ -42,7 +39,6 @@ exports[`<Button /> tests mount properly 1`] = `
         disabled={false}
         focusRipple={true}
         keyboardFocusedClassName="MuiButton-keyboardFocused-9"
-        onClick={null}
         type="button"
       >
         <ButtonBase
@@ -50,23 +46,21 @@ exports[`<Button /> tests mount properly 1`] = `
           className="MuiButton-root-1"
           classes={
             Object {
-              "disabled": "MuiButtonBase-disabled-16",
-              "root": "MuiButtonBase-root-15",
+              "disabled": "MuiButtonBase-disabled-17",
+              "root": "MuiButtonBase-root-16",
             }
           }
           disableRipple={false}
           disabled={false}
           focusRipple={true}
           keyboardFocusedClassName="MuiButton-keyboardFocused-9"
-          onClick={null}
           tabIndex={0}
           type="button"
         >
           <button
-            className="MuiButtonBase-root-15 MuiButton-root-1"
+            className="MuiButtonBase-root-16 MuiButton-root-1"
             disabled={false}
             onBlur={[Function]}
-            onClick={null}
             onFocus={[Function]}
             onKeyDown={[Function]}
             onKeyUp={[Function]}
@@ -93,25 +87,25 @@ exports[`<Button /> tests mount properly 1`] = `
                 center={false}
                 classes={
                   Object {
-                    "ripple": "MuiTouchRipple-ripple-21",
-                    "rippleFast": "MuiTouchRipple-rippleFast-23",
-                    "rippleVisible": "MuiTouchRipple-rippleVisible-22",
-                    "root": "MuiTouchRipple-root-17",
-                    "wrapper": "MuiTouchRipple-wrapper-18",
-                    "wrapperLeaving": "MuiTouchRipple-wrapperLeaving-19",
-                    "wrapperPulsating": "MuiTouchRipple-wrapperPulsating-20",
+                    "ripple": "MuiTouchRipple-ripple-22",
+                    "rippleFast": "MuiTouchRipple-rippleFast-24",
+                    "rippleVisible": "MuiTouchRipple-rippleVisible-23",
+                    "root": "MuiTouchRipple-root-18",
+                    "wrapper": "MuiTouchRipple-wrapper-19",
+                    "wrapperLeaving": "MuiTouchRipple-wrapperLeaving-20",
+                    "wrapperPulsating": "MuiTouchRipple-wrapperPulsating-21",
                   }
                 }
               >
                 <TransitionGroup
                   childFactory={[Function]}
-                  className="MuiTouchRipple-root-17"
+                  className="MuiTouchRipple-root-18"
                   component="span"
                   enter={true}
                   exit={true}
                 >
                   <span
-                    className="MuiTouchRipple-root-17"
+                    className="MuiTouchRipple-root-18"
                   />
                 </TransitionGroup>
               </TouchRipple>

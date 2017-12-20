@@ -3,7 +3,7 @@
     "@babel/typescript",
     "@babel/env",
     "@babel/react",
-    "@babel/stage-3"
+    "@babel/stage-0"
   ],
   "plugins": [
     "lodash",
@@ -17,7 +17,7 @@
         "@babel/typescript",
         "@babel/env",
         "@babel/react",
-        "@babel/stage-3"
+        "@babel/stage-0"
       ],
       "plugins":[
         ["babel-plugin-styled-components", { "ssr": true }],

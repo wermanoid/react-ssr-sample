@@ -18,7 +18,7 @@
       "#public/*": ["public/*"],
       "#app/*": ["src/*"],
       "#store": ["src/store"],
-      "#env/*": ["src/environment/*"],
+      "#env": ["src/environment"],
       "#containers/*": ["src/containers/*"],
       "#components/*": ["src/components/*"],
       "#atom/*": ["src/components/atom/*"],

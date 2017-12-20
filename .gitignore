@@ -2,4 +2,3 @@ node_modules/
 dist/
 .awcache/
 
-yarn.lock

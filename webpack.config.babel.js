@@ -7,6 +7,7 @@ import {
 } from 'webpack';
 import HardSourcePlugin from 'hard-source-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import UglifyPlugin from 'uglifyjs-webpack-plugin';
 import resolver from './webpack.config.resolve';
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
@@ -16,7 +17,7 @@ export default () => ({
   ...resolver,
   context: SRC_DIR,
   target: 'web',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-eval-source-map' : '',
   entry: {
     client: [
       'react-hot-loader/patch',
@@ -60,5 +61,6 @@ export default () => ({
       minChunks: Infinity,
     }),
     ...(process.env.NODE_ENV === 'analyze' && [new BundleAnalyzerPlugin()]),
+    ...(process.env.NODE_ENV === 'production' && [new UglifyPlugin()]),
   ],
 });
