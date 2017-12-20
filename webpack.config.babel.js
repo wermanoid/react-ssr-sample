@@ -5,7 +5,6 @@ import {
   EnvironmentPlugin,
   optimize,
 } from 'webpack';
-import HardSourcePlugin from 'hard-source-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyPlugin from 'uglifyjs-webpack-plugin';
 import resolver from './webpack.config.resolve';
@@ -49,7 +48,6 @@ export default () => ({
     }),
     new HotModuleReplacementPlugin(),
     new NoEmitOnErrorsPlugin(),
-    new HardSourcePlugin(),
     new optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks(module) {

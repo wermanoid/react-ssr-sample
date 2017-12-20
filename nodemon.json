@@ -3,7 +3,7 @@
   "restartable": "rs",
   "ignore": [".git", "node_modules/**/node_modules"],
   "inspect": true,
-  "watch": ["src/server/"],
+  "watch": ["src/server/", "webpack.config.babel.js"],
   "execMap": {
     "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
   },

@@ -33,7 +33,7 @@
   "exclude": ["node_modules", "**/node_modules/*"],
   "include": ["src/**/*"],
   "awesomeTypescriptLoaderOptions": {
-    "useCache": true,
+    "useCache": false,
     "useBabel": true,
     "babelCore": "@babel/core",
     "forceIsolatedModules": true
