@@ -38,7 +38,7 @@
     "@types/enzyme-to-json": "^1.5.0",
     "@types/express": "^4.0.39",
     "@types/history": "^4.6.2",
-    "@types/jest": "^21.1.8",
+    "@types/jest": "^21.1.9",
     "@types/lodash": "^4.14.91",
     "@types/material-ui": "^0.18.5",
     "@types/node": "^8.5.1",
@@ -84,6 +84,7 @@
     "jest-styled-components": "^4.9.0",
     "nodemon": "^1.12.1",
     "react-hot-loader": "^3.0.0",
+    "ts-jest": "^22.0.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^7.0.0",
     "tslint-react": "^3.2.0",
@@ -122,13 +123,26 @@
     "./src"
   ],
   "jest": {
+    
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
     "moduleNameMapper": {
-      "\\.(png|jpg|svg|woff|woff2|ico|css|scss)$": "<rootDir>/test/setup/file-mock.js"
+      "\\.(png|jpg|svg|woff|woff2|ico|css|scss)$": "<rootDir>/test/setup/file-mock.ts"
     },
     "setupFiles": [
-      "<rootDir>/test/shim.js"
+      "<rootDir>/test/shim.ts"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/test/enzyme.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/test/enzyme.ts",
     "collectCoverageFrom": [
       "src/**/*.js",
       "src/**/*.jsx",

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Button /> tests mount properly 1`] = `
-<Button>
+<Button
+  onClick={null}
+>
   <withStyles(Button)
     onClick={null}
   >
