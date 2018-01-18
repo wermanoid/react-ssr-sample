@@ -13,12 +13,12 @@ const ConnectedSwitch = connect(switchMapState, null)(Switch);
 const Routes = () => (
   <ThemeProvider theme={{}}>
     <App>
-      <ConnectedSwitch>
+      <Switch>
         <Route exact path="/" component={Pages.HomePage} />
         <Route path="/home" component={Pages.HomePage} />
         <Route path="/sample" component={Pages.SamplePage} />
         <Route path="*" component={Pages.NotFoundPage} />
-      </ConnectedSwitch>
+      </Switch>
     </App>
   </ThemeProvider>
 );

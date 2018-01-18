@@ -1,4 +1,4 @@
 // @flow
 export default {
-  webApiUrl: 'some develop localhost in future here',
+  apolloServerUrl: 'http://localhost:9001/graphql',
 };
