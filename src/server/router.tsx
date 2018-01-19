@@ -14,17 +14,17 @@ import env from "#env";
 
 import indexTemplate, { Html } from "./index.tmpl";
 
-const client = new ApolloClient({
-  link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
-  ssrMode: true,
-  cache: new InMemoryCache()
-});
-
-const store = configureStore();
-
 export default (req, res) => {
+  const client = new ApolloClient({
+    link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
+    ssrMode: true,
+    cache: new InMemoryCache()
+  });
   const context: any = {};
+  const store = configureStore();
+
   console.log(store.getState())
+
   const App = (
     <Provider store={store}>
       <ApolloProvider client={client}>

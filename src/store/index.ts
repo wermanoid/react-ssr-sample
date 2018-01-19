@@ -7,9 +7,9 @@ import rootReducer from './reducers';
 const initial = {};
 
 export default (initialState: any = initial, history?: any) => {
-  let middleware = applyMiddleware(routerMiddleware(history));
+  let middleware = history && applyMiddleware(routerMiddleware(history));
 
-  if (process.env.NODE_ENV === 'develop') {
+  if (middleware && process.env.NODE_ENV === 'develop') {
     middleware = composeWithDevTools(middleware);
   }
   const store = history

@@ -6,19 +6,19 @@ import { ThemeProvider } from 'styled-components';
 import App from '#components/App';
 import * as Pages from './loader';
 
-const switchMapState = ({ location }) => ({ location });
+const switchMapState = ({ location }) => console.log('move to', location) || ({ location });
 
 const ConnectedSwitch = connect(switchMapState, null)(Switch);
 
 const Routes = () => (
   <ThemeProvider theme={{}}>
     <App>
-      <Switch>
+      <ConnectedSwitch>
         <Route exact path="/" component={Pages.HomePage} />
         <Route path="/home" component={Pages.HomePage} />
         <Route path="/sample" component={Pages.SamplePage} />
         <Route path="*" component={Pages.NotFoundPage} />
-      </Switch>
+      </ConnectedSwitch>
     </App>
   </ThemeProvider>
 );
