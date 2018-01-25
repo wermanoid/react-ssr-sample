@@ -45,6 +45,7 @@ export default () => ({
   plugins: [
     new EnvironmentPlugin({
       NODE_ENV: 'develop',
+      BABEL_ENV: 'client',
     }),
     new HotModuleReplacementPlugin(),
     new NoEmitOnErrorsPlugin(),

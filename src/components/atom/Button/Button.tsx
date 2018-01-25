@@ -8,7 +8,7 @@ type WelcomeProps = {
 }
 
 const Button: React.SFC<WelcomeProps> = ({ children, onClick }) => (
-  <Btn onClick={onClick}>{ children || 'sample'}</Btn>
+  <Btn color="secondary" onClick={onClick}>{ children || 'sample'}</Btn>
 );
 
 // Button.defaultProps = {

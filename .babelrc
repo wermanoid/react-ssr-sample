@@ -8,10 +8,15 @@
   "plugins": [
     "lodash",
     ["babel-plugin-styled-components", { "ssr": true }],
-    [ "babel-plugin-webpack-alias", { "config": "./webpack.config.resolve.js" } ],
-    "dynamic-import-webpack"
+    [ "babel-plugin-webpack-alias", { "config": "./webpack.config.resolve.js" } ]
   ],
   "env": {
+    "server": {
+      "plugins": ["dynamic-import-node"]
+    },
+    "client": {
+      "plugins": ["dynamic-import-webpack"]
+    },
     "test": {
       "presets": [
         "@babel/typescript",

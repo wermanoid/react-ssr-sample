@@ -2,13 +2,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Input from 'material-ui/Input';
+import Button from '#atom/Button';
 
 const SamplePage = () => (
-  <span>
-    This link helps you to <Link to="/home">go home</Link>
+  <div>
+    This link helps you to <Link to="/home">go home</Link> now, so...
     <br />
     <Input />
-  </span>
+    <Button onClick={() => console.log('work')}>button</Button>
+  </div>
 );
 
 export default SamplePage;

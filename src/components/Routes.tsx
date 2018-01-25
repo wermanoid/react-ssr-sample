@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import App from '#components/App';
 import * as Pages from './loader';
 
-const switchMapState = ({ location }) => console.log('move to', location) || ({ location });
+const switchMapState = ({ router: { location } }) => ({ location });
 
 const ConnectedSwitch = connect(switchMapState, null)(Switch);
 

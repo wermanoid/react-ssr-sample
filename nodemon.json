@@ -8,7 +8,8 @@
     "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
   },
   "env": {
-    "NODE_ENV": "develop"
+    "NODE_ENV": "develop",
+    "BABEL_ENV": "server"
   },
   "ext": "ts tsx"
 }
