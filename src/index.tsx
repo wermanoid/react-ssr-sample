@@ -21,7 +21,11 @@ import configureStore from "./store";
 const theme = createMuiTheme({});
 const history = createHistory();
 const store = configureStore(window['__INITIAL_STATE__'], history);
-
+const client = new ApolloClient({
+  link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
+  cache: new InMemoryCache().restore(window['__APOLLO_STATE__']),
+  ssrForceFetchDelay: 100,
+});
 
 class Main extends React.Component {
   // Remove the server-side injected CSS.
@@ -31,6 +35,7 @@ class Main extends React.Component {
       jssStyles.remove();
     }
     delete window['__INITIAL_STATE__'];
+    delete window['__APOLLO_STATE__'];
   }
 
   render() {
@@ -42,19 +47,17 @@ const renderApp = (Component: any) => hydrate((
   <Main>
     <AppContainer>
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Component />
-        </ConnectedRouter>
+        <ApolloProvider client={client}>
+          <ConnectedRouter history={history}>
+            <Component />
+          </ConnectedRouter>
+        </ApolloProvider>
       </Provider>
     </AppContainer>
   </Main>),
   document.getElementById("react-root")
 );
 
-// const client = new ApolloClient({
-//   link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
-//   cache: new InMemoryCache().restore(window['__APOLLO_STATE__']),
-// });
 
 // <AppContainer>
 //   <Provider store={store}>
