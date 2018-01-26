@@ -7,12 +7,11 @@ type HtmlProps = {
   state?: Object,
   styles?: any,
   mStyles?: any,
-  loadable?: any,
 }
 
 const stringify = (field, obj) => `window.${field}=${JSON.stringify(obj).replace(/</g, '\\u003c')};`
 
-export default ({ content, store, state, styles, mStyles, loadable }: HtmlProps) => {
+export default ({ content, store, state, styles, mStyles }: HtmlProps) => {
   const helmet = Helmet.renderStatic();
   const htmlAttrs = helmet.htmlAttributes.toComponent();
   const bodyAttrs = helmet.bodyAttributes.toComponent();
@@ -28,8 +27,6 @@ export default ({ content, store, state, styles, mStyles, loadable }: HtmlProps)
       <body {...bodyAttrs}>
         <div id="react-root" dangerouslySetInnerHTML={{ __html: content }}></div>
         <style id="jss-server-side">{mStyles}</style>
-
-        { loadable }
 
         { state && stringify('__APOLLO_STATE__', state).replace(/</g, '\\u003c') }
         { store && stringify('__INITIAL_STATE__', store).replace(/</g, '\\u003c') }

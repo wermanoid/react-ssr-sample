@@ -3,12 +3,14 @@ import * as React from 'react';
 import Btn from 'material-ui/Button';
 
 type WelcomeProps = {
-  children?: any,
-  onClick?: () => void,
-}
+  children?: any;
+  onClick?: () => void;
+};
 
 const Button: React.SFC<WelcomeProps> = ({ children, onClick }) => (
-  <Btn color="secondary" onClick={onClick}>{ children || 'sample'}</Btn>
+  <Btn color="secondary" onClick={onClick}>
+    {children || 'sample'}
+  </Btn>
 );
 
 // Button.defaultProps = {

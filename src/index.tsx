@@ -10,7 +10,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from "apollo-cache-inmemory";
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import createHistory from "history/createBrowserHistory";
-import { loadComponents } from 'loadable-components'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import Routes from "#components/Routes";
@@ -67,7 +66,7 @@ const renderApp = (Component: any) => hydrate((
 //   </Provider>
 // </AppContainer>
 
-loadComponents().then(() => renderApp(Routes));
+renderApp(Routes);
 
 if (process.env.NODE_ENV === "develop" && module.hot) {
   module.hot.accept("#components/Routes", () => {

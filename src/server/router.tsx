@@ -14,11 +14,12 @@ import Routes from '#components/Routes';
 import App from '#components/App';
 import Html from './index.tmpl';
 
-const renderApp = ({ sheet, sheetsRegistry, store, history }): Promise<any> => {
+const renderApp = async ({ sheet, sheetsRegistry, store, history }): Promise<any> => {
   const generateClassName = createGenerateClassName();
+  const theme = createMuiTheme({});
   const app = sheet.collectStyles((
     <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
-      <MuiThemeProvider theme={createMuiTheme({})} sheetsManager={new Map()}>
+      <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
             <Routes />
@@ -28,27 +29,25 @@ const renderApp = ({ sheet, sheetsRegistry, store, history }): Promise<any> => {
     </JssProvider>
   ));
 
-  return getLoadableState(app).then((loadable) => ({
+  return ({
     html: renderToString(app),
-    loadable,
     sheetsRegistry,
     store,
     sheet,
-  }));
+  });
 }
 
-const renderHtml = ({ html, sheet, sheetsRegistry, store, loadable }) => {
+const renderHtml = ({ html, sheet, sheetsRegistry, store }) => {
   const page = <Html
     content={html}
     styles={sheet.getStyleElement()}
     mStyles={sheetsRegistry.toString()}
     store={store.getState()}
-    loadable={loadable.getScriptElement()}
   />;
   return `<!doctype html>\n${renderToStaticMarkup(page)}`;
 }
 
-export default (req, res) => {
+export default async (req, res) => {
   // const client = new ApolloClient({
   //   link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
   //   ssrMode: true,
@@ -95,6 +94,6 @@ export default (req, res) => {
   store.dispatch(push(req.originalUrl));
 
   res.contentType('text/html');
-  return renderApp({ sheet, sheetsRegistry, store, history })
-    .then(app => res.end(renderHtml(app)));
+  const result = await renderApp({ sheet, sheetsRegistry, store, history });
+  res.end(renderHtml(result));
 };
