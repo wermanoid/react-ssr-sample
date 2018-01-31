@@ -30,11 +30,6 @@ export default ({ content, store, state, styles, mStyles }: HtmlProps) => {
 
         { state && stringify('__APOLLO_STATE__', state).replace(/</g, '\\u003c') }
         { store && stringify('__INITIAL_STATE__', store).replace(/</g, '\\u003c') }
-
-        {state && <script dangerouslySetInnerHTML={{ __html: stringify('__APOLLO_STATE__', state) }} />}
-        <br />
-        {store && <script dangerouslySetInnerHTML={{ __html: stringify('__INITIAL_STATE__', store) }} />}
-
         <script type="application/javascript" src="public/manifest.bundle.js"></script>
         <script type="application/javascript" src="public/vendor.bundle.js"></script>
         <script type="application/javascript" src="public/client.bundle.js"></script>

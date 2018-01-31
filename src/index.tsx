@@ -73,7 +73,7 @@ renderApp(Routes);
 
 if (process.env.NODE_ENV === "develop" && module.hot) {
   module.hot.accept("#components/Routes", () => {
-    const NewApp = require("#components/Routes").default;
-    renderApp(NewApp);
+    const newRoutes = require("#components/Routes").default;
+    renderApp(newRoutes);
   });
 }
