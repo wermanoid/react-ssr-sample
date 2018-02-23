@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
+    "oldbuild": "NODE_ENV=production webpack --config webpack.config.babel.js",
     "lint": "tslint ./src/**/*.ts*",
     "analyze": "NODE_ENV=analyze webpack --config webpack.config.babel.js -p",
     "storybook": "NODE_ENV=develop start-storybook -p 9001",
     "tdd": "jest --colors --watch --notify ",
     "start": "nodemon src/server/index.ts --config nodemon.json --",
-    "jest": "jest"
+    "jest": "jest",
+    "prebuild": "rm -rf ./dist",
+    "build": "NODE_ENV=develop webpack --config webpack.config.babel.js"
   },
   "keywords": [
     "react",
@@ -20,17 +22,18 @@
   "author": "Alex Werman",
   "license": "ISC",
   "resolutions": {
-    "babel-core": "^7.0.0-beta.35"
+    "babel-core": "^7.0.0-beta.40"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.35",
-    "@babel/core": "^7.0.0-beta.35",
-    "@babel/node": "^7.0.0-beta.35",
-    "@babel/preset-env": "^7.0.0-beta.35",
-    "@babel/preset-react": "^7.0.0-beta.35",
-    "@babel/preset-stage-0": "^7.0.0-beta.35",
-    "@babel/preset-typescript": "^7.0.0-beta.35",
-    "@babel/register": "^7.0.0-beta.35",
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/node": "^7.0.0-beta.40",
+    "@babel/polyfill": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "@babel/preset-stage-0": "^7.0.0-beta.40",
+    "@babel/preset-typescript": "^7.0.0-beta.40",
+    "@babel/register": "^7.0.0-beta.40",
     "@storybook/addon-actions": "^3.2.16",
     "@storybook/addon-knobs": "^3.2.16",
     "@storybook/addon-links": "^3.2.16",
@@ -98,7 +101,8 @@
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.9.4",
-    "webpack-hot-middleware": "^2.20.0"
+    "webpack-hot-middleware": "^2.20.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.5",
