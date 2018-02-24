@@ -4,16 +4,15 @@
   "description": "sample for react isomorfic app",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "oldbuild": "NODE_ENV=production webpack --config webpack.config.babel.js",
     "lint": "tslint ./src/**/*.ts*",
     "analyze": "NODE_ENV=analyze webpack --config webpack.config.babel.js -p",
     "storybook": "NODE_ENV=develop start-storybook -p 9001",
     "tdd": "jest --colors --watch --notify ",
-    "start": "nodemon src/server/index.ts --config nodemon.json --",
     "jest": "jest",
+
     "prebuild": "rm -rf ./dist",
-    "build": "NODE_ENV=develop webpack --config webpack.config.babel.js"
+    "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
+    "start": "nodemon src/server/index.ts --config nodemon.json --"
   },
   "keywords": [
     "react",

@@ -66,7 +66,7 @@ export default () => [
       ...(process.env.NODE_ENV === 'production' && [new UglifyPlugin()]),
     ],
   },
-  {
+  ...(process.env.NODE_ENV === 'production' && [{
     ...resolver,
     entry: {
       server: `${SRC_DIR}/server/index.ts`,
@@ -85,7 +85,7 @@ export default () => [
       rules: [
         {
           test: /.(tsx)?$/,
-          loaders: ['react-hot-loader/webpack', 'awesome-typescript-loader'],
+          loaders: ['awesome-typescript-loader'],
           exclude: path.resolve(__dirname, 'node_modules'),
           include: path.resolve(__dirname, 'src'),
         },
@@ -93,14 +93,12 @@ export default () => [
     },
     plugins: [
       new EnvironmentPlugin({
-        NODE_ENV: 'develop',
+        NODE_ENV: 'production',
         BABEL_ENV: 'server',
       }),
       new CheckerPlugin(),
-      ...(process.env.NODE_ENV === 'develop' && [new HotModuleReplacementPlugin()]),
       new NoEmitOnErrorsPlugin(),
-      ...(process.env.NODE_ENV === 'analyze' && [new BundleAnalyzerPlugin()]),
-      ...(process.env.NODE_ENV === 'production' && [new UglifyPlugin()]),
-    ],
-  },
+      new UglifyPlugin(),
+    ]
+  }]),
 ];
