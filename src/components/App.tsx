@@ -32,7 +32,7 @@ const App = ({ children, className, data}: PropsType) => (
           <MenuIcon />
         </IconButton>
         <Typography type="title" color="inherit" style={{ flex: 1 }}>
-          App title says: {get(data, 'hello', 'no data')}
+          App title says and: {get(data, 'hello', 'no data')}
         </Typography>
       </Toolbar>
     </AppBar>

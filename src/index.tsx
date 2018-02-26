@@ -1,22 +1,22 @@
 /* eslint global-require: 0 */
-import React from "react";
-import { Provider } from "react-redux";
-import { hydrate } from "react-dom";
-import { ConnectedRouter } from "react-router-redux";
-import { AppContainer } from "react-hot-loader";
+import React from 'react';
+import { hydrate } from 'react-dom';
+import { Provider } from 'react-redux';
 import { ApolloClient } from 'apollo-client';
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from 'react-apollo';
 import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { ConnectedRouter } from 'react-router-redux';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import createHistory from 'history/createBrowserHistory';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import createHistory from "history/createBrowserHistory";
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-import Routes from "#components/Routes";
-import App from "#components/App";
+import Routes from '#components/Routes';
+import App from '#components/App';
+import Main from '#components/Root';
 import env from '#env';
 
-import configureStore from "./store";
+import configureStore from './store';
 
 const theme = createMuiTheme({});
 const history = createHistory();
@@ -27,25 +27,10 @@ const client = new ApolloClient({
   ssrForceFetchDelay: 100,
 });
 
-class Main extends React.Component {
-  // Remove the server-side injected CSS.
-  componentDidMount() {
-    const jssStyles = document.getElementById('jss-server-side');
-    if (jssStyles) {
-      jssStyles.remove();
-    }
-    delete window['__INITIAL_STATE__'];
-    delete window['__APOLLO_STATE__'];
-  }
 
-  render() {
-    return this.props.children;
-  }
-}
-
-const renderApp = (Component: any) => hydrate((
-  <Main>
-    <AppContainer>
+const renderApp = (Component: any) =>
+  hydrate(
+    <Main>
       <Provider store={store}>
         <ApolloProvider client={client}>
           <ConnectedRouter history={history}>
@@ -53,27 +38,15 @@ const renderApp = (Component: any) => hydrate((
           </ConnectedRouter>
         </ApolloProvider>
       </Provider>
-    </AppContainer>
-  </Main>),
-  document.getElementById("react-root")
-);
-
-
-// <AppContainer>
-//   <Provider store={store}>
-//     <ApolloProvider client={client}>
-//       <ConnectedRouter history={history}>
-//         <Component />
-//       </ConnectedRouter>
-//     </ApolloProvider>
-//   </Provider>
-// </AppContainer>
+    </Main>,
+    document.getElementById('react-root'),
+  );
 
 renderApp(Routes);
 
-if (process.env.NODE_ENV === "develop" && module.hot) {
-  module.hot.accept("#components/Routes", () => {
-    const newRoutes = require("#components/Routes").default;
-    renderApp(newRoutes);
-  });
-}
+// if (process.env.NODE_ENV === "develop" && module.hot) {
+//   module.hot.accept("#components/Routes", () => {
+//     const newRoutes = require("#components/Routes").default;
+//     renderApp(newRoutes);
+//   });
+// }

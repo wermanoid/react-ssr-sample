@@ -14,28 +14,25 @@ const app = express();
 app.use(cors);
 app.use(helmet());
 
-// if (process.env.NODE_ENV === 'develop') {
-//   const webapckConfig = config();
-//   const compiler = webpack(webapckConfig);
-//   app.use(webpackDevMiddleware(compiler, {
-//     noInfo: true,
-//     publicPath: webapckConfig.output.publicPath,
-//     stats: {
-//       assets: false,
-//       colors: true,
-//       version: false,
-//       hash: false,
-//       timings: false,
-//       chunks: false,
-//       chunkModules: false,
-//     },
-//   }));
-//   app.use(webpackHotMiddleWare(compiler));
-// }
-app.use((req, resp, next) => {
-  console.log(__dirname, req.path, path.resolve(__dirname, 'public'));
-  return next();
-});
+if (process.env.NODE_ENV === 'develop') {
+  const [webapckConfig] = config();
+  const compiler = webpack(webapckConfig);
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: webapckConfig.output.publicPath,
+    stats: {
+      assets: false,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: false,
+      chunks: false,
+      chunkModules: false,
+    },
+  }));
+  app.use(webpackHotMiddleWare(compiler));
+}
+
 app.use('/public', express.static(path.resolve(__dirname, 'public')));
 app.get('*', router);
 

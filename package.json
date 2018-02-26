@@ -9,10 +9,9 @@
     "storybook": "NODE_ENV=develop start-storybook -p 9001",
     "tdd": "jest --colors --watch --notify ",
     "jest": "jest",
-
     "prebuild": "rm -rf ./dist",
     "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
-    "start": "nodemon src/server/index.ts --config nodemon.json --"
+    "start": "NODE_ENV=develop nodemon src/server/index.ts --config nodemon.json --"
   },
   "keywords": [
     "react",
@@ -88,7 +87,7 @@
     "jest": "^21.2.1",
     "jest-styled-components": "^4.9.0",
     "nodemon": "^1.12.1",
-    "react-hot-loader": "^3.0.0",
+    "react-hot-loader": "^4.0.0-rc.0",
     "ts-jest": "^22.0.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^7.0.0",

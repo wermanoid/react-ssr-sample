@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import App, { withGql } from '#components/App';
+import { hot } from 'react-hot-loader';
 import SApp from './App.style';
 import * as Pages from './loader';
 
@@ -25,4 +26,4 @@ const Routes = () => (
   </ThemeProvider>
 );
 
-export default Routes;
+export default hot(module)(Routes);

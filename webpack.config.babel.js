@@ -22,10 +22,7 @@ export default () => [
     devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-eval-source-map' : '',
     entry: {
       client: [
-        ...(process.env.NODE_ENV !== 'production' && [
-          'react-hot-loader/patch',
-          'webpack-hot-middleware/client?reload=true',
-        ]),
+        ...(process.env.NODE_ENV !== 'production' && ['webpack-hot-middleware/client?reload=true']),
         `${SRC_DIR}/index.tsx`,
       ],
     },
@@ -37,10 +34,20 @@ export default () => [
     module: {
       rules: [
         {
-          test: /.(tsx)?$/,
-          loaders: ['react-hot-loader/webpack', 'awesome-typescript-loader'],
+          test: /.tsx?$/,
+          // loaders: ['react-hot-loader/babel', 'awesome-typescript-loader'],
           exclude: path.resolve(__dirname, 'node_modules'),
           include: path.resolve(__dirname, 'src'),
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                babelrc: true,
+                plugins: ['react-hot-loader/babel'],
+              },
+            },
+            'awesome-typescript-loader',
+          ],
         },
       ],
     },
@@ -66,39 +73,46 @@ export default () => [
       ...(process.env.NODE_ENV === 'production' && [new UglifyPlugin()]),
     ],
   },
-  ...(process.env.NODE_ENV === 'production' && [{
-    ...resolver,
-    entry: {
-      server: `${SRC_DIR}/server/index.ts`,
-    },
-    output: {
-      path: DIST_DIR,
-      filename: '[name].js',
-    },
-    target: 'node',
-    node: {
-      __filename: false,
-      __dirname: false,
-    },
-    externals: [NodeExt()],
-    module: {
-      rules: [
-        {
-          test: /.(tsx)?$/,
-          loaders: ['awesome-typescript-loader'],
-          exclude: path.resolve(__dirname, 'node_modules'),
-          include: path.resolve(__dirname, 'src'),
-        },
+  ...(process.env.NODE_ENV === 'production' && [
+    {
+      ...resolver,
+      entry: {
+        server: `${SRC_DIR}/server/index.ts`,
+      },
+      output: {
+        path: DIST_DIR,
+        filename: '[name].js',
+      },
+      target: 'node',
+      node: {
+        __filename: false,
+        __dirname: false,
+      },
+      externals: [NodeExt()],
+      module: {
+        rules: [
+          {
+            test: /.js$/,
+            loaders: ['babel-loader'],
+            exclude: path.resolve(__dirname, 'node_modules'),
+          },
+          {
+            test: /.tsx?$/,
+            loaders: ['awesome-typescript-loader'],
+            exclude: path.resolve(__dirname, 'node_modules'),
+            include: path.resolve(__dirname, 'src'),
+          },
+        ],
+      },
+      plugins: [
+        new EnvironmentPlugin({
+          NODE_ENV: 'production',
+          BABEL_ENV: 'server',
+        }),
+        new CheckerPlugin(),
+        new NoEmitOnErrorsPlugin(),
+        new UglifyPlugin(),
       ],
     },
-    plugins: [
-      new EnvironmentPlugin({
-        NODE_ENV: 'production',
-        BABEL_ENV: 'server',
-      }),
-      new CheckerPlugin(),
-      new NoEmitOnErrorsPlugin(),
-      new UglifyPlugin(),
-    ]
-  }]),
+  ]),
 ];
