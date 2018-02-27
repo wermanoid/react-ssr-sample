@@ -10,6 +10,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import createHistory from 'history/createBrowserHistory';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+// @ts-ignore
+import { consolidateStreamedStyles } from 'styled-components'
 
 import Routes from '#components/Routes';
 import App from '#components/App';
@@ -42,6 +44,7 @@ const renderApp = (Component: any) =>
     document.getElementById('react-root'),
   );
 
+consolidateStreamedStyles();
 renderApp(Routes);
 
 // if (process.env.NODE_ENV === "develop" && module.hot) {
