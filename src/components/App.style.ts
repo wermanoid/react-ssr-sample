@@ -1,6 +1,6 @@
 
-import sc, { injectGlobal } from 'styled-components';
-const styled = sc;
+import styledComponents, { injectGlobal } from 'styled-components';
+const styled = styledComponents;
 
 injectGlobal`
   body {
@@ -8,6 +8,6 @@ injectGlobal`
   }
 `;
 
-export default (App) => styled(App)`
+export default (app: React.SFC) => styled(app)`
   background-color: #eee;
 `;
