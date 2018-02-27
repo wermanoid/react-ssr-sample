@@ -106,7 +106,6 @@ export default () => [
       },
       plugins: [
         new EnvironmentPlugin({
-          NODE_ENV: 'production',
           BABEL_ENV: 'server',
         }),
         new CheckerPlugin(),

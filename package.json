@@ -11,7 +11,8 @@
     "jest": "jest",
     "prebuild": "rm -rf ./dist",
     "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
-    "start": "NODE_ENV=develop nodemon src/server/index.ts --config nodemon.json --"
+    "start": "NODE_ENV=develop nodemon src/server/index.ts --config nodemon.json --",
+    "start:prod": "NODE_ENV=production node ./dist/server.js"
   },
   "keywords": [
     "react",

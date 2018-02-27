@@ -1,12 +1,11 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 
 class Root extends React.Component {
   // Remove the server-side injected CSS.
   componentDidMount() {
     const jssStyles = document.getElementById('jss-server-side');
-    if (jssStyles) {
-      // jssStyles.remove();
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
     }
     delete window['__INITIAL_STATE__'];
     delete window['__APOLLO_STATE__'];
@@ -17,4 +16,4 @@ class Root extends React.Component {
   }
 }
 
-export default hot(module)(Root);
+export default Root;
