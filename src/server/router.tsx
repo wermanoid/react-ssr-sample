@@ -1,29 +1,44 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { renderToString, renderToStaticMarkup, renderToNodeStream } from 'react-dom/server';
-import { ServerStyleSheet } from 'styled-components';
-import { SheetsRegistry } from 'react-jss/lib/jss';
-import JssProvider from 'react-jss/lib/JssProvider';
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from 'material-ui/styles';
-import { Provider } from 'react-redux';
-import { push, ConnectedRouter } from 'react-router-redux';
-import createMemoryHistory from 'history/createMemoryHistory';
-import { getLoadableState } from 'loadable-components/server';
-import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-fetch';
+import JssProvider from 'react-jss/lib/JssProvider';
+import createMemoryHistory from 'history/createMemoryHistory';
+
+import { History } from 'history';
+import { Request, Response } from 'express';
+import { ApolloClient } from 'apollo-client';
+import { Provider, Store } from 'react-redux';
+import { createHttpLink } from 'apollo-link-http';
+import { SheetsRegistry } from 'react-jss/lib/jss';
+import { ServerStyleSheet } from 'styled-components';
+import { renderToNodeStream } from 'react-dom/server';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { push, ConnectedRouter } from 'react-router-redux';
+import { ApolloProvider, getDataFromTree } from 'react-apollo';
+import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from 'material-ui/styles';
 
 import env from '#env';
 import configureStore from '#store';
 import Routes from '#components/Routes';
-import App from '#components/App';
 
-const stringify = (field, obj) =>
+const stringify = (field: string, obj: object) =>
   `window.${field}=${JSON.stringify(obj).replace(/</g, '\\u003c')};`;
 
-const renderApp = async ({ sheet, sheetsRegistry, store, history, client }): Promise<any> => {
+interface IRenderAppArgs {
+  client: ApolloClient<any>;
+  history: History;
+  sheet: ServerStyleSheet;
+  sheetsRegistry: SheetsRegistry;
+  store: Store<any>;
+}
+
+const renderApp = async ({
+  sheet,
+  sheetsRegistry,
+  store,
+  history,
+  client,
+}: IRenderAppArgs): Promise<React.ReactElement<any>> => {
   const generateClassName = createGenerateClassName();
   const theme = createMuiTheme({});
   const app = sheet.collectStyles(
@@ -47,11 +62,11 @@ const renderApp = async ({ sheet, sheetsRegistry, store, history, client }): Pro
   return app;
 };
 
-export default async (req, res) => {
+export default async (req: Request, res: Response) => {
   const client = new ApolloClient({
-    link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
-    ssrMode: true,
     cache: new InMemoryCache(),
+    link: createHttpLink({ fetch, uri: env.apolloServerUrl }),
+    ssrMode: true,
   });
 
   const sheet = new ServerStyleSheet();
@@ -63,13 +78,14 @@ export default async (req, res) => {
   res.contentType('text/html');
   try {
     const app = await renderApp({
+      client,
+      history,
       sheet,
       sheetsRegistry,
       store,
-      history,
-      client,
     });
     const helmet = Helmet.renderStatic();
+
     res.write(`
      <html lang="en" ${helmet.htmlAttributes}>
        <head>
@@ -78,7 +94,7 @@ export default async (req, res) => {
        </head>
        <body ${helmet.bodyAttributes}>
    `);
-   // @ts-ignore
+
     const stream = sheet.interleaveWithNodeStream(renderToNodeStream(app));
     stream.pipe(res, { end: false });
     stream.on('end', () =>
@@ -95,7 +111,6 @@ export default async (req, res) => {
    `),
     );
   } catch (e) {
-    console.log(e);
     res.status(500).end(`Something went wrong. Sorry!<br />${e.message}`);
   }
 };

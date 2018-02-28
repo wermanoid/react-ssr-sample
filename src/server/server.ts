@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { get } from 'lodash';
 import express from 'express';
 import webpack from 'webpack';
 import helmet from 'helmet';
@@ -16,18 +17,18 @@ app.use(helmet());
 
 if (process.env.NODE_ENV === 'develop') {
   const [webapckConfig] = config();
-  const compiler = webpack(webapckConfig);
+  const compiler = webpack(webapckConfig as object);
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
-    publicPath: webapckConfig.output.publicPath,
+    publicPath: get(webapckConfig, 'output.publicPath', '/public'),
     stats: {
       assets: false,
+      chunkModules: false,
+      chunks: false,
       colors: true,
-      version: false,
       hash: false,
       timings: false,
-      chunks: false,
-      chunkModules: false,
+      version: false,
     },
   }));
   app.use(webpackHotMiddleWare(compiler));

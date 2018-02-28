@@ -7,15 +7,18 @@ import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-
+import { Location } from 'history';
 import App, { withGql } from '#components/App';
 import AppStyle from '#components/App.style';
 import * as Pages from '#components/loader';
 
+interface IStateMap {
+  router: { location?: Location };
+}
 
-const switchMapState = ({ router: { location } }) => ({ location });
+const switchMapState = ({ router: { location } }: IStateMap) => ({ location });
 
-const ConnectedSwitch = connect(switchMapState, null)(Switch);
+const ConnectedSwitch = connect(switchMapState, null)((props) => <Switch {...props}/>);
 const Application = withGql(AppStyle(App));
 
 const routes: React.SFC = () => (

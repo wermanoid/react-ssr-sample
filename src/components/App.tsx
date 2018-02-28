@@ -3,11 +3,11 @@
  * define application viewport component
  * @children {React.Node} - any page to display
  */
+import * as React from 'react';
 import { default as gql } from 'graphql-tag';
 import { get } from 'lodash';
-import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { default as Helmet } from 'react-helmet';
+import Helmet from 'react-helmet';
 
 import Menu from 'material-ui-icons/Menu';
 import AppBar from 'material-ui/AppBar';

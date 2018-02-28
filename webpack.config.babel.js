@@ -19,7 +19,7 @@ export default () => [
     ...resolver,
     context: SRC_DIR,
     target: 'web',
-    devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-eval-source-map' : '',
+    devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-eval-source-map' : false,
     entry: {
       client: [
         ...(process.env.NODE_ENV !== 'production' && ['webpack-hot-middleware/client?reload=true']),
@@ -29,7 +29,7 @@ export default () => [
     output: {
       path: `${DIST_DIR}/public`,
       filename: '[name].bundle.js',
-      publicPath: '/public/',
+      publicPath: '/public',
     },
     module: {
       rules: [

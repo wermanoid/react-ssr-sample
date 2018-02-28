@@ -11,9 +11,19 @@
     },
     "new-parens": true,
     "strict-boolean-expressions": false,
+    "ordered-imports": false,
+    "import-name": false,
     "quotemark": [true, "single", "jsx-double"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
 
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": true,
+    "no-boolean-literal-compare": true,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "no-multiline-string": false,
     "no-unused-expression": [true, "allow-fast-null-checks", "allow-tagged-template"],
     "no-console": {
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
@@ -27,15 +37,3 @@
     }
   }
 }
-
-/*
-"no-arg": true,
-"no-bitwise": true,
-"no-conditional-assignment": true,
-"no-consecutive-blank-lines": true,
-
-"no-boolean-literal-compare": true,
-"no-submodule-imports": false,
-"no-implicit-dependencies": false,
-"no-multiline-string": false,
-*/

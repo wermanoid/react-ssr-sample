@@ -8,48 +8,37 @@ import { createHttpLink } from 'apollo-link-http';
 import { ConnectedRouter } from 'react-router-redux';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import createHistory from 'history/createBrowserHistory';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-// @ts-ignore
-import { consolidateStreamedStyles } from 'styled-components'
 
-import Routes from '#components/Routes';
-import App from '#components/App';
-import Main from '#components/Root';
 import env from '#env';
+import Main from '#components/Root';
+import Routes from '#components/Routes';
 
 import configureStore from './store';
 
 const theme = createMuiTheme({});
 const history = createHistory();
-const store = configureStore(window['__INITIAL_STATE__'], history);
+const store = configureStore(window.__INITIAL_STATE__, history);
 const client = new ApolloClient({
-  link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
-  cache: new InMemoryCache().restore(window['__APOLLO_STATE__']),
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+  link: createHttpLink({ fetch, uri: env.apolloServerUrl }),
   ssrForceFetchDelay: 100,
 });
-
 
 const renderApp = (Component: any) =>
   hydrate(
     <Main>
-      <Provider store={store}>
-        <ApolloProvider client={client}>
-          <ConnectedRouter history={history}>
-            <Component />
-          </ConnectedRouter>
-        </ApolloProvider>
-      </Provider>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <ApolloProvider client={client}>
+            <ConnectedRouter history={history}>
+              <Component />
+            </ConnectedRouter>
+          </ApolloProvider>
+        </Provider>
+      </MuiThemeProvider>
     </Main>,
     document.getElementById('react-root'),
   );
 
-consolidateStreamedStyles();
 renderApp(Routes);
-
-// if (process.env.NODE_ENV === "develop" && module.hot) {
-//   module.hot.accept("#components/Routes", () => {
-//     const newRoutes = require("#components/Routes").default;
-//     renderApp(newRoutes);
-//   });
-// }

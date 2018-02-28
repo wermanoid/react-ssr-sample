@@ -8,6 +8,6 @@ injectGlobal`
   }
 `;
 
-export default (app: React.SFC) => styled(app)`
+export default (app: React.SFC): React.ComponentType<any> => styled(app)`
   background-color: #eee;
 `;
