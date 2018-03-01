@@ -1,3 +1,4 @@
+// @format
 import React from 'react';
 import Helmet from 'react-helmet';
 import fetch from 'isomorphic-fetch';

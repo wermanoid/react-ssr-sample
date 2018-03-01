@@ -1,4 +1,6 @@
-/* eslint global-require: 0 */
+/**
+ * app client side entry point
+ */
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -25,7 +27,12 @@ const client = new ApolloClient({
   ssrForceFetchDelay: 100,
 });
 
-const renderApp = (Component: any) =>
+/**
+ * [renderApp hydrates application after SSR return page]
+ * @param  Component [root component to render]
+ * @return void
+ */
+const renderApp = (Component: React.ComponentType): void => {
   hydrate(
     <Main>
       <MuiThemeProvider theme={theme}>
@@ -40,5 +47,6 @@ const renderApp = (Component: any) =>
     </Main>,
     document.getElementById('react-root'),
   );
+};
 
 renderApp(Routes);
