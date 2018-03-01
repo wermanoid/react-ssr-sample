@@ -21,6 +21,8 @@
       "#public/*": ["public/*"],
       "#app/*": ["src/*"],
       "#store": ["src/store"],
+      "#store/*": ["src/store/*"],
+      "#hoc/*": ["src/hoc/*"],
       "#env": ["src/environment"],
       "#containers/*": ["src/containers/*"],
       "#components/*": ["src/components/*"],

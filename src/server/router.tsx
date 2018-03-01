@@ -26,11 +26,11 @@ const stringify = (field: string, obj: object) =>
   `window.${field}=${JSON.stringify(obj).replace(/</g, '\\u003c')};`;
 
 interface IRenderAppArgs {
-  client: ApolloClient<any>;
+  client: ApolloClient<{}>;
   history: History;
   sheet: ServerStyleSheet;
   sheetsRegistry: SheetsRegistry;
-  store: Store<any>;
+  store: Store<{}>;
 }
 
 const renderApp = async ({
@@ -39,7 +39,7 @@ const renderApp = async ({
   store,
   history,
   client,
-}: IRenderAppArgs): Promise<React.ReactElement<any>> => {
+}: IRenderAppArgs): Promise<React.ReactElement<{}>> => {
   const generateClassName = createGenerateClassName();
   const theme = createMuiTheme({});
   const app = sheet.collectStyles(

@@ -3,7 +3,8 @@
  * define application viewport component
  * @children {React.Node} - any page to display
  */
-import * as React from 'react';
+import React from 'react';
+import { compose } from 'recompose';
 import { default as gql } from 'graphql-tag';
 import { get } from 'lodash';
 import { graphql } from 'react-apollo';
@@ -16,6 +17,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
 import Button from '#atom/Button';
+import withCleanup from '#hoc/withCleanup';
+import withStyle from '#components/App.sc';
 
 const query = gql`
   query Query {
@@ -31,6 +34,9 @@ interface IAppProps {
 // tslint:disable-next-line: no-console
 const stub = (id: number) => () => console.log('work', id);
 
+/**
+ * Application viewport component
+ */
 const App: React.SFC<IAppProps> = ({ children, className, data }) => (
   <div className={className}>
     <Helmet>
@@ -59,5 +65,9 @@ const App: React.SFC<IAppProps> = ({ children, className, data }) => (
   </div>
 );
 
-export const withGql = graphql(query);
-export default App;
+const withGql = graphql(query);
+export default compose(
+  withCleanup,
+  withGql,
+  withStyle,
+)(App);

@@ -1,26 +1,27 @@
 /**
-* Common config to resolve project path aliases.
-* @module Webpack resolve config.
-*/
+ * Common config to resolve project path aliases.
+ * @module Webpack resolve config.
+ */
 
 const path = require('path');
 
 module.exports = {
   resolve: {
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      '#public': path.join(__dirname, 'public'),
       '#app': path.join(__dirname, 'src'),
-      '#store': path.join(__dirname, 'src/store'),
-      '#env': path.join(__dirname, 'src/environment'),
-      '#containers': path.join(__dirname, 'src/containers'),
-      '#components': path.join(__dirname, 'src/components'),
       '#atom': path.join(__dirname, 'src/components/atom'),
+      '#components': path.join(__dirname, 'src/components'),
+      '#constants': path.join(__dirname, 'src/constants'),
+      '#containers': path.join(__dirname, 'src/containers'),
+      '#env': path.join(__dirname, 'src/environment'),
+      '#hoc': path.join(__dirname, 'src/hoc'),
       '#molecule': path.join(__dirname, 'src/components/molecule'),
       '#organism': path.join(__dirname, 'src/components/organism'),
       '#page': path.join(__dirname, 'src/components/page'),
+      '#public': path.join(__dirname, 'public'),
+      '#store': path.join(__dirname, 'src/store'),
       '#template': path.join(__dirname, 'src/components/template'),
-      '#constants': path.join(__dirname, 'src/constants'),
     },
+    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.jsx'],
   },
 };

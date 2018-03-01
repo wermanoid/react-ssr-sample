@@ -1,4 +1,5 @@
 /**
+ * src/index.ts
  * app client side entry point
  */
 import React from 'react';
@@ -13,10 +14,8 @@ import createHistory from 'history/createBrowserHistory';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import env from '#env';
-import Main from '#components/Root';
+import configureStore from '#store';
 import Routes from '#components/Routes';
-
-import configureStore from './store';
 
 const theme = createMuiTheme({});
 const history = createHistory();
@@ -28,23 +27,20 @@ const client = new ApolloClient({
 });
 
 /**
- * [renderApp hydrates application after SSR return page]
- * @param  Component [root component to render]
- * @return void
+ * renderApp hydrates application after SSR return page
+ * @param  Component root component to render
  */
 const renderApp = (Component: React.ComponentType): void => {
   hydrate(
-    <Main>
-      <MuiThemeProvider theme={theme}>
-        <Provider store={store}>
-          <ApolloProvider client={client}>
-            <ConnectedRouter history={history}>
-              <Component />
-            </ConnectedRouter>
-          </ApolloProvider>
-        </Provider>
-      </MuiThemeProvider>
-    </Main>,
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <ConnectedRouter history={history}>
+            <Component />
+          </ConnectedRouter>
+        </ApolloProvider>
+      </Provider>
+    </MuiThemeProvider>,
     document.getElementById('react-root'),
   );
 };

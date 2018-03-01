@@ -1,8 +1,11 @@
-import React from 'react';
+/**
+ * withCleanup.ts
+ * add HOC that removes unnecessary DOM nodes after app is being initialized
+ */
+import { lifecycle } from 'recompose';
 
-class Root extends React.Component {
-  // Remove the server-side injected CSS.
-  public componentDidMount() {
+const withCleanup: Hoc = lifecycle({
+  componentDidMount(): void {
     const jssStyles = document.getElementById('jss-server-side');
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
@@ -10,10 +13,6 @@ class Root extends React.Component {
     delete window.__INITIAL_STATE__;
     delete window.__APOLLO_STATE__;
   }
+});
 
-  public render() {
-    return this.props.children;
-  }
-}
-
-export default Root;
+export default withCleanup;

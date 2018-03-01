@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Location } from 'history';
-import App, { withGql } from '#components/App';
-import AppStyle from '#components/App.style';
+import Application from '#components/App';
 import * as Pages from '#components/loader';
 
 interface IStateMap {
@@ -19,9 +18,11 @@ interface IStateMap {
 const switchMapState = ({ router: { location } }: IStateMap) => ({ location });
 
 const ConnectedSwitch = connect(switchMapState, null)((props) => <Switch {...props}/>);
-const Application = withGql(AppStyle(App));
 
-const routes: React.SFC = () => (
+/**
+ * Application component with router and pages
+ */
+const Routes: React.SFC = () => (
   <ThemeProvider theme={{}}>
     <Application>
       <ConnectedSwitch>
@@ -34,4 +35,4 @@ const routes: React.SFC = () => (
   </ThemeProvider>
 );
 
-export default hot(module)(routes);
+export default hot(module)(Routes);

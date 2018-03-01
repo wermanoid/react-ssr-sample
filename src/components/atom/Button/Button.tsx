@@ -1,20 +1,21 @@
-// @flow
+/**
+ * Provides basic button
+ * @module #atom/Button
+ */
 import * as React from 'react';
 import Btn from 'material-ui/Button';
 
-type WelcomeProps = {
-  children?: any;
+interface IButton {
   onClick?: () => void;
 };
 
-const Button: React.SFC<WelcomeProps> = ({ children, onClick }) => (
+/**
+ * Provides basic button component
+ */
+const Button: React.SFC<IButton> = ({ children, onClick }) => (
   <Btn color="primary" onClick={onClick}>
     {children || 'sample'}
   </Btn>
 );
-
-// Button.defaultProps = {
-//   children: null,
-// };
 
 export default Button;
