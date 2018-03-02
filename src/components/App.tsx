@@ -1,26 +1,43 @@
+/**
+ * App.tsx
+ * define application viewport component
+ * @children {React.Node} - any page to display
+ */
 import React from 'react';
-import Helmet from 'react-helmet'
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { compose } from 'recompose';
+import { default as gql } from 'graphql-tag';
 import { get } from 'lodash';
+import { graphql } from 'react-apollo';
+import Helmet from 'react-helmet';
 
+import Menu from 'material-ui-icons/Menu';
 import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 
 import Button from '#atom/Button';
+import withCleanup from '#hoc/withCleanup';
+import withStyle from '#components/App.sc';
 
-const query = gql`query Query { hello }`;
+const query = gql`
+  query Query {
+    hello
+  }
+`;
 
-type PropsType = {
-  children: any,
-  className?: string,
-  data: any,
+interface IAppProps {
+  className?: string;
+  data: { hello: string };
 }
 
-const App = ({ children, className, data}: PropsType) => (
+// tslint:disable-next-line: no-console
+const stub = (id: number) => () => console.log('work', id);
+
+/**
+ * Application viewport component
+ */
+const App: React.SFC<IAppProps> = ({ children, className, data }) => (
   <div className={className}>
     <Helmet>
       <title>Isomorfic react app sample</title>
@@ -29,25 +46,28 @@ const App = ({ children, className, data}: PropsType) => (
     <AppBar position="static">
       <Toolbar>
         <IconButton color="inherit" aria-label="Menu">
-          <MenuIcon />
+          <Menu />
         </IconButton>
         <Typography type="title" color="inherit" style={{ flex: 1 }}>
-          App title says: {get(data, 'hello', 'no data')}
+          App title says and: {get(data, 'hello', 'no data')}
         </Typography>
       </Toolbar>
     </AppBar>
     <section>
       <div>pages content here</div>
-      { children }
+      {children}
     </section>
     <section>
       And footer with change
-      <Button onClick={() => console.log('work')}>Footer Button #1</Button>
-      <Button onClick={() => console.log('work')}>Footer Button #2</Button>
+      <Button onClick={stub(1)}>Footer Button #1</Button>
+      <Button onClick={stub(2)}>Footer Button #2</Button>
     </section>
   </div>
 );
 
-
-export const withGql = graphql(query);
-export default App;
+const withGql = graphql(query);
+export default compose(
+  withCleanup,
+  withGql,
+  withStyle,
+)(App);

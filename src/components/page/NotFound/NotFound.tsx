@@ -1,16 +1,16 @@
-// @flow
+/**
+ * Provides root component for non-existing pages
+ * @module #page/NotFound
+ */
 import React from 'react';
-import { Route } from 'react-router-dom';
 
-const Page404 = () => (
+/**
+ * Root component for not found error page
+ */
+const NotFound = () => (
   <div>
     <h1>404 : Not Found!</h1>
   </div>
 );
-//
-// Page404.defaultProps = {
-//   staticContext: {},
-// };
 
-const NotFound = () => <Route render={Page404} />;
 export default NotFound;

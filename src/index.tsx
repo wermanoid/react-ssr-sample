@@ -1,51 +1,38 @@
-/* eslint global-require: 0 */
-import React from "react";
-import { Provider } from "react-redux";
-import { hydrate } from "react-dom";
-import { ConnectedRouter } from "react-router-redux";
-import { AppContainer } from "react-hot-loader";
+/**
+ * src/index.ts
+ * app client side entry point
+ */
+import React from 'react';
+import { hydrate } from 'react-dom';
+import { Provider } from 'react-redux';
 import { ApolloClient } from 'apollo-client';
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from 'react-apollo';
 import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from "apollo-cache-inmemory";
-import BrowserRouter from 'react-router-dom/BrowserRouter';
-import createHistory from "history/createBrowserHistory";
+import { ConnectedRouter } from 'react-router-redux';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import createHistory from 'history/createBrowserHistory';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-import Routes from "#components/Routes";
-import App from "#components/App";
 import env from '#env';
-
-import configureStore from "./store";
+import configureStore from '#store';
+import Routes from '#components/Routes';
 
 const theme = createMuiTheme({});
 const history = createHistory();
-const store = configureStore(window['__INITIAL_STATE__'], history);
+const store = configureStore(window.__INITIAL_STATE__, history);
 const client = new ApolloClient({
-  link: createHttpLink({ uri: env.apolloServerUrl, fetch }),
-  cache: new InMemoryCache().restore(window['__APOLLO_STATE__']),
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+  link: createHttpLink({ fetch, uri: env.apolloServerUrl }),
   ssrForceFetchDelay: 100,
 });
 
-class Main extends React.Component {
-  // Remove the server-side injected CSS.
-  componentDidMount() {
-    const jssStyles = document.getElementById('jss-server-side');
-    if (jssStyles) {
-      jssStyles.remove();
-    }
-    delete window['__INITIAL_STATE__'];
-    delete window['__APOLLO_STATE__'];
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
-
-const renderApp = (Component: any) => hydrate((
-  <Main>
-    <AppContainer>
+/**
+ * renderApp hydrates application after SSR return page
+ * @param  Component root component to render
+ */
+const renderApp = (Component: React.ComponentType): void => {
+  hydrate(
+    <MuiThemeProvider theme={theme}>
       <Provider store={store}>
         <ApolloProvider client={client}>
           <ConnectedRouter history={history}>
@@ -53,27 +40,9 @@ const renderApp = (Component: any) => hydrate((
           </ConnectedRouter>
         </ApolloProvider>
       </Provider>
-    </AppContainer>
-  </Main>),
-  document.getElementById("react-root")
-);
-
-
-// <AppContainer>
-//   <Provider store={store}>
-//     <ApolloProvider client={client}>
-//       <ConnectedRouter history={history}>
-//         <Component />
-//       </ConnectedRouter>
-//     </ApolloProvider>
-//   </Provider>
-// </AppContainer>
+    </MuiThemeProvider>,
+    document.getElementById('react-root'),
+  );
+};
 
 renderApp(Routes);
-
-if (process.env.NODE_ENV === "develop" && module.hot) {
-  module.hot.accept("#components/Routes", () => {
-    const newRoutes = require("#components/Routes").default;
-    renderApp(newRoutes);
-  });
-}
