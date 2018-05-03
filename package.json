@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/server/index.ts --config nodemon.json --",
+    "build": "cross-env babel-node scripts/build.ts --extensions '.js,.jsx,.ts,.tsx'",
     "type-check": "tsc"
   },
   "resolutions": {
@@ -26,10 +27,17 @@
     "@types/helmet": "^0.0.37",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "@types/rimraf": "^2.0.2",
+    "@types/webpack": "^4.1.4",
+    "awesome-typescript-loader": "^5.0.0",
+    "babel-loader": "^7.1.4",
     "babel-plugin-webpack-alias": "^2.1.2",
     "cross-env": "^5.1.4",
     "nodemon": "^1.17.3",
-    "typescript": "^2.8.3"
+    "rimraf": "^2.6.2",
+    "typescript": "^2.8.3",
+    "webpack": "^4.6.0",
+    "webpack-manifest-plugin": "^2.0.2"
   },
   "dependencies": {
     "chalk": "^2.4.1",

@@ -5,7 +5,12 @@ const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath: string) =>
   path.resolve(appDirectory, relativePath);
 
+/**
+ * Define all required path resolutions
+ * and re-export some helpers methods
+ */
 const paths = {
+  resolve: path.resolve,
   clientBuild: resolveApp('dist/client'),
   serverBuild: resolveApp('dist/server'),
   dotenv: resolveApp('.env'),
@@ -24,13 +29,5 @@ const paths = {
     ];
   },
 };
-
-// paths.resolveModules = [
-//     paths.srcClient,
-//     paths.srcServer,
-//     paths.srcShared,
-//     paths.src,
-//     'node_modules',
-// ];
 
 export default paths;
