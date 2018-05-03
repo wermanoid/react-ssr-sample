@@ -15,6 +15,7 @@ const paths = {
   serverBuild: resolveApp('dist/server'),
   dotenv: resolveApp('.env'),
   src: resolveApp('src'),
+  config: resolveApp('config'),
   srcClient: resolveApp('src/client'),
   srcServer: resolveApp('src/server'),
   srcShared: resolveApp('src/shared'),

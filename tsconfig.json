@@ -19,10 +19,19 @@
     "lib": ["es6", "dom"],
     "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*"],
-      "#config/*": ["config/*"]
+      "*": ["node_modules/*", "src/typings/*"],
+      "#config/*": ["config/*"],
+      "#server": ["src/server"],
+      "#shared": ["src/shared"],
+      "#shared/*": ["src/shared/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"],
-  "include": ["src/**/*", "config/**/*", "scripts/**/*"]
+  "include": ["src/**/*", "config/**/*", "scripts/**/*"],
+  "awesomeTypescriptLoaderOptions": {
+    "useCache": false,
+    "useBabel": true,
+    "babelCore": "@babel/core",
+    "forceIsolatedModules": true
+  }
 }

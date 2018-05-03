@@ -3,13 +3,9 @@
   "restartable": "rs",
   "ignore": [".git", "node_modules"],
   "inspect": true,
-  "watch": ["src/server/", "webpack.config.babel.js"],
+  "watch": ["src/server/", "config/", "tsconfig.json"],
   "execMap": {
     "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
   },
-  "env": {
-    "NODE_ENV": "development",
-    "BABEL_ENV": "server"
-  },
-  "ext": "ts tsx"
+  "ext": "ts tsx js jsx"
 }

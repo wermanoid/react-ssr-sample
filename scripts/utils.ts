@@ -1,4 +1,4 @@
-import { Compiler } from 'webpack';
+import { ICompiler, Compiler } from 'webpack';
 
 const chalk = require('chalk');
 
@@ -7,9 +7,9 @@ export const logMessage = (message: string, level = 'info') => {
     console.log(`[${new Date().toISOString()}]`, chalk[color](message));
 };
 
-export const compilerPromise = (compiler: Compiler) => {
+export const compilerPromise = (compiler: ICompiler) => {
     return new Promise((resolve, reject) => {
-        compiler.hooks.done.tap('done', (stats) => {
+        (compiler as Compiler).hooks.done.tap('done', (stats) => {
             if (stats.hasErrors()) {
                 return reject('Compilation failed');
             }

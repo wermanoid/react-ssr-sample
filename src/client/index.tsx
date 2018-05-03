@@ -1,4 +1,5 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import App from '#shared';
 
-hydrate(<div>sample</div>, document.getElementById('react-root'));
+hydrate(<App />, document.getElementById('react-root'));

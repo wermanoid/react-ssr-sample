@@ -6,7 +6,7 @@
   "author": "CaH4eZ <wermanoid@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon src/server/index.ts --config nodemon.json --",
+    "dev": "cross-env NODE_ENV=development nodemon scripts/dev.ts --config nodemon.json --",
     "build": "cross-env babel-node scripts/build.ts --extensions '.js,.jsx,.ts,.tsx'",
     "type-check": "tsc"
   },
@@ -33,18 +33,24 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-webpack-alias": "^2.1.2",
     "cross-env": "^5.1.4",
+    "file-loader": "^1.1.11",
     "nodemon": "^1.17.3",
     "rimraf": "^2.6.2",
     "typescript": "^2.8.3",
     "webpack": "^4.6.0",
-    "webpack-manifest-plugin": "^2.0.2"
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.1",
+    "webpack-manifest-plugin": "^2.0.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "chalk": "^2.4.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "express-manifest-helpers": "^0.5.0",
     "helmet": "^3.12.0",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-helmet": "^5.2.0"
   }
 }
