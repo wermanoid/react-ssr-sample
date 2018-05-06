@@ -22,6 +22,7 @@
       "*": ["node_modules/*", "src/typings/*"],
       "#config/*": ["config/*"],
       "#server": ["src/server"],
+      "#server/*": ["src/server/*"],
       "#shared": ["src/shared"],
       "#shared/*": ["src/shared/*"]
     }

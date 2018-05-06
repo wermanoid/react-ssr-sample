@@ -6,7 +6,6 @@ import { Request, Response, NextFunction } from 'express';
 import App from '#shared';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.url)
   if (/^\/static\//.test(req.url)) return next();
 
   const app = (

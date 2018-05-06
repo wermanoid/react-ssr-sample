@@ -12,5 +12,8 @@
     "@babel/react",
     "@babel/typescript"
   ],
-  "plugins": [["webpack-alias", { "config": "./config/webpack/resolvers.js" }]]
+  "plugins": [
+    "react-hot-loader/babel",
+    ["webpack-alias", { "config": "./config/webpack/resolvers.js" }]
+  ]
 }
