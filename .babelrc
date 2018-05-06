@@ -13,6 +13,7 @@
     "@babel/typescript"
   ],
   "plugins": [
+    "lodash",
     "react-hot-loader/babel",
     ["webpack-alias", { "config": "./config/webpack/resolvers.js" }]
   ]
