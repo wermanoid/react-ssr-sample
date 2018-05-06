@@ -14,7 +14,7 @@ export default {
   externals: [nodeExternals()],
   output: {
     path: paths.serverBuild,
-    filename: 'server.js',
+    filename: 'index.js',
     publicPath: paths.publicPath,
   },
   ...resolvers,

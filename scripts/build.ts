@@ -13,17 +13,17 @@ const execute = async () => {
   rimraf.sync(paths.serverBuild);
 
   const compilers = webpack([clientConfig, serverConfig]);
-  const clientCompiler = compilers.compilers[0];
-  const serverCompiler = compilers.compilers[1];
+  // const clientCompiler = compilers.compilers[0];
+  // const serverCompiler = compilers.compilers[1];
 
-  const clientPromise = compile(clientCompiler);
-  const serverPromise = compile(serverCompiler);
+  // const clientPromise = compile(clientCompiler);
+  // const serverPromise = compile(serverCompiler);
 
   try {
-    await serverPromise;
-    await clientPromise;
+    await Promise.all(compilers.compilers.map(compile))
+    // await serverPromise;
+    // await clientPromise;
     logMessage('Compilation finished successfully!', 'info');
-    // process.exit();
   } catch (error) {
     logMessage(error, 'error');
   }

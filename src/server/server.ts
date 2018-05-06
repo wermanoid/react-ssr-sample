@@ -13,14 +13,12 @@ const host = String(process.env.HOST || 'localhost');
 const environment = String(process.env.NODE_ENV || 'development');
 
 export default (app: express.Express) => {
+  app.enable('strict routing');
   app.use(cors);
   app.use(helmet());
   app.use(bodyParser.json());
-  app.get('/static/manifest.json', (req, res) => {
-    console.log('here', req.url);
-    res.redirect('http://localhost:9000/static/manifest.json');
-  })
   app.use(manifest({ manifestPath: `${paths.clientBuild}/manifest.json` }));
+  app.use(paths.publicPath, express.static(paths.clientBuild));
   app.get('*', router);
 
   app.listen(port, host, () => {
