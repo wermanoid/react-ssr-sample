@@ -14,6 +14,7 @@ module.exports = {
       '#config': path.join(rootpath, 'config'),
       '#server': src('server'),
       '#shared': src('shared'),
+      '#core': src('core'),
       // '#app': path.join(__dirname, 'src'),
       // '#atom': path.join(__dirname, 'src/components/atom'),
       // '#components': path.join(__dirname, 'src/components'),

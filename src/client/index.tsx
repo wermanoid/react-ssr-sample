@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import App from '#shared';

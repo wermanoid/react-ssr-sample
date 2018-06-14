@@ -1,16 +1,9 @@
 {
   "presets": [
-    [
-      "@babel/env",
-      {
-        "targets": {
-          "browsers": ["last 2 versions"]
-        }
-      }
-    ],
-    ["@babel/stage-0", { "decoratorsLegacy": true }],
-    "@babel/react",
-    "@babel/typescript"
+    ["@babel/env", { "useBuiltIns": "usage" }],
+    ["@babel/stage-0", { "decoratorsLegacy": true, "loose": true }],
+    "@babel/typescript",
+    "@babel/react"
   ],
   "plugins": [
     "lodash",
