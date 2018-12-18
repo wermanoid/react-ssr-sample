@@ -1,1 +1,0 @@
-# Isomorfic sample
