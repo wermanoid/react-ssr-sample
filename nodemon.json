@@ -5,7 +5,7 @@
   "execMap": {
     "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
   },
-  "watch": ["src/server", "scripts", "tsconfig.json"],
+  "watch": ["src/server", "scripts", "tsconfig.json", "config/webpack"],
   "env": {
     "NODE_ENV": "development"
   },

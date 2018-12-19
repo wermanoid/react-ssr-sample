@@ -6,7 +6,10 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
@@ -20,7 +23,12 @@
     "rootDir": "./",
     "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
+      "*": ["node_modules/*", "src/types/*"],
+      "#config/*": ["config/*"],
+      "#server": ["src/server"],
+      "#server/*": ["src/server/*"],
+      "#shared": ["src/shared"],
+      "#shared/*": ["src/shared/*"]
     }
   },
   "awesomeTypescriptLoaderOptions": {
@@ -29,6 +37,6 @@
     "babelCore": "@babel/core",
     "forceIsolatedModules": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "config/**/*", "scripts/**/*"],
   "exclude": ["node_modules", "**/node_modules/*", "dist"],
 }
