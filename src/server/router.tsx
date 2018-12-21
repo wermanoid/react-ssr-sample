@@ -1,8 +1,7 @@
-
+import { NextFunction, Request, Response } from 'express';
+import { join, map, pipe } from 'lodash/fp';
 import React from 'react';
-import { map, pipe, join } from 'lodash/fp';
 import { renderToNodeStream } from 'react-dom/server';
-import { Request, Response, NextFunction } from 'express';
 
 import Application from '#shared/Router';
 
@@ -14,8 +13,10 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   ];
 
   const scripts = pipe(
-    map(file => `<script type="application/javascript" src="${file}"></script>`),
-    join('')
+    map(
+      (file) => `<script type="application/javascript" src="${file}"></script>`,
+    ),
+    join(''),
   )(assets);
 
   const app = (
@@ -32,7 +33,10 @@ export default async (req: Request, res: Response, next: NextFunction) => {
    `);
 
   const stream = renderToNodeStream(app);
-  stream.pipe(res, { end: false });
+  stream.pipe(
+    res,
+    { end: false },
+  );
   stream.on('end', () => {
     res.end(`
        ${scripts}

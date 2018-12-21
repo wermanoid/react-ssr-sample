@@ -1,9 +1,8 @@
-
-import express from 'express';
+import bodyParser from 'body-parser';
 import chalk from 'chalk';
+import express from 'express';
 import manifest from 'express-manifest-helpers';
 import helmet from 'helmet';
-import bodyParser from 'body-parser';
 
 import project from '#config/project';
 
@@ -27,4 +26,4 @@ export default (app: express.Express, logger: any) => {
     logger.info(`Running environment: ${chalk.cyan(environment)}`);
     logger.info(`Server running at: ${chalk.cyan(`http://${host}:${port}`)}`);
   });
-}
+};

@@ -4,6 +4,8 @@ import server from './server';
 
 const app = express();
 
+const { log } = console;
+
 server(app, {
-  info: (...args: object[]) => console.log(...args),
+  info: (...args: object[]) => log(...args),
 });
