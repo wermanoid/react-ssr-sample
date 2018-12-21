@@ -16,11 +16,23 @@ module.exports = api => {
       "@babel/react"
     ],
     plugins: [
+      "lodash",
       ["webpack-alias", { "config": "./config/webpack/resolvers.js" }],
       ['@babel/transform-runtime', { corejs: 2 }],
       ["@babel/plugin-proposal-decorators", { legacy: true }],
       ["@babel/plugin-proposal-class-properties", { loose: true }]
     ],
-    ignore: ["node_modules"]
+    ignore: ["node_modules"],
+    env: {
+      production: {
+        plugins: ["closure-elimination"],
+      },
+      server: {
+        plugins: ['dynamic-import-node'],
+      },
+      client: {
+        plugins: ['dynamic-import-webpack'],
+      },
+    }
   };
 };

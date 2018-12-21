@@ -1,16 +1,16 @@
-import * as rimraf from 'rimraf';
 import express from 'express';
+import * as rimraf from 'rimraf';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleWare from 'webpack-hot-middleware';
 
-import webpackConfig from '#config/webpack';
 import project from '#config/project';
+import webpackConfig from '#config/webpack';
 import server from '#server/server';
 
-import { logMessage, compile } from './utils';
+import { compile, logMessage } from './utils';
 
-// const port = Number(process.env.PORT || 9000);
+const { log } = console;
 
 const execute = async () => {
   rimraf.sync(project.clientBuild);
@@ -24,10 +24,11 @@ const execute = async () => {
       ...client.entry,
       client: [
         'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-        ...client.entry.client
-      ]
-    }
-  }
+        '@babel/polyfill',
+        ...client.entry.client,
+      ],
+    },
+  };
   const compiler = webpack(clientConfig);
 
   await compile(compiler);
@@ -41,20 +42,21 @@ const execute = async () => {
       stats: clientConfig.stats,
       watchOptions: {
         ignored: /node_modules/,
-      }
+      },
     }),
   );
 
-  app.use(webpackHotMiddleWare(compiler, {
-    log: console.log,
-    path: '/__webpack_hmr',
-    heartbeat: 10 * 1000,
-  }));
+  app.use(
+    webpackHotMiddleWare(compiler, {
+      log,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000,
+    }),
+  );
 
   server(app, {
-    info: (...args: object[]) => console.log(...args),
-  })
-}
-
+    info: (...args: object[]) => log(...args),
+  });
+};
 
 execute();

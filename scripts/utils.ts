@@ -1,5 +1,5 @@
-import { ICompiler, Compiler, Stats } from 'webpack';
 import chalk from 'chalk';
+import { Compiler, ICompiler, Stats } from 'webpack';
 
 export const logMessage = (message: string, level = 'info') => {
   const color =
