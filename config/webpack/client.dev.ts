@@ -1,10 +1,15 @@
 import { HotModuleReplacementPlugin } from 'webpack';
-import baseConfig from './client.base';
+import WriteFileWebpackPlugin from 'write-file-webpack-plugin';
 
+import baseConfig from './client.base';
 
 export default {
   ...baseConfig,
-  plugins: [ new HotModuleReplacementPlugin(), ...baseConfig.plugins],
+  plugins: [
+    new WriteFileWebpackPlugin(),
+    new HotModuleReplacementPlugin(),
+    ...baseConfig.plugins,
+  ],
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   performance: {

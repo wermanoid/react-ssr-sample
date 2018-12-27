@@ -5,7 +5,7 @@ import { App } from './App';
 
 const Router = () => (
   <div>
-    Sample was asap yay! Work
+    <p>Sample was asap yay! Work with all feats now</p>
     <App />
   </div>
 );

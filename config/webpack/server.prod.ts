@@ -1,4 +1,4 @@
-import baseConfig from './server.dev';
+import baseConfig from './server.base';
 
 export default {
   ...baseConfig,

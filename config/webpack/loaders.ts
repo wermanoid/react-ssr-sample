@@ -1,7 +1,7 @@
 import project from '../project';
 
 const babelLoader = {
-  test: /.js$/,
+  test: /.jsx?$/,
   loaders: ['babel-loader'],
   exclude: /node_modules/,
   include: [project.src, project.config],
@@ -12,6 +12,23 @@ const typescriptLoader = {
   loaders: ['awesome-typescript-loader'],
   exclude: /node_modules/,
   include: [project.src, project.config],
+};
+
+const urlLoaderClient = {
+  test: /\.(png|jpe?g|gif|svg)$/,
+  loader: require.resolve('url-loader'),
+  options: {
+    limit: 2048,
+    name: 'assets/[name].[hash:8].[ext]',
+  },
+};
+
+const urlLoaderServer = {
+  ...urlLoaderClient,
+  options: {
+    ...urlLoaderClient.options,
+    emitFile: false,
+  },
 };
 
 const fileLoader = {
@@ -28,5 +45,10 @@ const fileLoader = {
 };
 
 export default {
-  oneOf: [babelLoader, typescriptLoader, fileLoader],
+  client: {
+    oneOf: [babelLoader, typescriptLoader, fileLoader, urlLoaderClient],
+  },
+  server: {
+    oneOf: [babelLoader, typescriptLoader, fileLoader, urlLoaderServer],
+  },
 };

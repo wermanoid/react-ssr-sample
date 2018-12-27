@@ -23,7 +23,7 @@
     "rootDir": "./",
     "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"],
+      "*": ["node_modules/*", "typings/*"],
       "#config/*": ["config/*"],
       "#server": ["src/server"],
       "#server/*": ["src/server/*"],
@@ -37,6 +37,6 @@
     "babelCore": "@babel/core",
     "forceIsolatedModules": true
   },
-  "include": ["src/**/*", "config/**/*", "scripts/**/*"],
-  "exclude": ["node_modules", "**/node_modules/*", "dist"],
+  "include": ["typings/*", "src/**/*", "config/**/*", "scripts/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

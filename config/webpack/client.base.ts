@@ -8,7 +8,7 @@ export default {
   name: 'client',
   target: 'web',
   entry: {
-    client: [path.resolve(project.srcClient, 'index.tsx')],
+    client: ['@babel/polyfill', path.resolve(project.srcClient, 'index.tsx')],
   },
   output: {
     path: project.clientBuild,
@@ -17,7 +17,7 @@ export default {
     chunkFilename: '[name].[chunkhash:8].chunk.js',
   },
   module: {
-    rules: [loaders],
+    rules: [loaders.client],
   },
   ...resolvers,
   plugins: [...plugins.client, ...plugins.shared],

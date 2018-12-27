@@ -3,7 +3,8 @@
   "ignore": [".git", "node_modules"],
   "verbose": true,
   "execMap": {
-    "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
+    "ts": "babel-node --extensions '.js,.jsx,.ts,.tsx'",
+    "js": "babel-node --extensions '.js,.jsx,.ts,.tsx'"
   },
   "watch": ["src/server", "scripts", "tsconfig.json", "config/webpack"],
   "env": {

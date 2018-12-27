@@ -8,12 +8,12 @@ const resolveApp = (relativePath: string) =>
 const project = {
   clientBuild: resolveApp('dist/client'),
   serverBuild: resolveApp('dist/server'),
-  dotenv: resolveApp('.env'),
+  // dotenv: resolveApp('.env'),
   src: resolveApp('src'),
   config: resolveApp('config'),
   srcClient: resolveApp('src/client'),
   srcServer: resolveApp('src/server'),
-  srcShared: resolveApp('src/shared'),
+  // srcShared: resolveApp('src/shared'),
   publicPath: '/static/',
 };
 

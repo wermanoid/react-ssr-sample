@@ -14,7 +14,7 @@ const execute = async () => {
   const compilers = webpack([client, server]);
 
   try {
-    await Promise.all(compilers.compilers.map(compile));
+    await Promise.all(compilers.compilers.map((c) => compile(c)));
     logMessage('Compilation finished successfully!', 'info');
   } catch (error) {
     logMessage(error, 'error');

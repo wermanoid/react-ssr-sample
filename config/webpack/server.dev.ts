@@ -1,33 +1,17 @@
-import path from 'path';
-import nodeExternals from 'webpack-node-externals';
+import { HotModuleReplacementPlugin } from 'webpack';
+import WriteFileWebpackPlugin from 'write-file-webpack-plugin';
 
-import project from '../project';
-import loaders from './loaders';
-import * as plugins from './plugins';
-import resolvers from './resolvers';
+import baseConfig from './server.base';
 
 export default {
-  name: 'server',
-  target: 'node',
-  entry: {
-    server: [path.resolve(project.srcServer, 'index.ts')],
-  },
-  externals: [nodeExternals()],
-  output: {
-    path: project.serverBuild,
-    filename: 'index.js',
-    publicPath: project.publicPath,
-  },
-  ...resolvers,
-  module: {
-    rules: [loaders],
-  },
-  plugins: [...plugins.shared, ...plugins.server],
-  stats: {
-    colors: true,
-  },
-  node: {
-    __filename: false,
-    __dirname: false,
+  ...baseConfig,
+  plugins: [
+    new WriteFileWebpackPlugin(),
+    ...baseConfig.plugins,
+    new HotModuleReplacementPlugin(),
+  ],
+  mode: 'development',
+  performance: {
+    hints: false,
   },
 };
