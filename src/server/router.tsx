@@ -29,6 +29,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     <html lang="en">
       <head>
         <base href="/" />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
         <div id="react-root">`);

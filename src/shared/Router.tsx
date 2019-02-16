@@ -1,13 +1,10 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
 
-import { App } from './App';
-
-const Router = () => (
+const Router: React.SFC = ({ children }) => (
   <div>
-    <p>Sample was asap yay! Work with all feats now</p>
-    <App />
+    <p>ROUTER: Sample was asap yay! Work with all feats now</p>
+    {children}
   </div>
 );
 
-export default hot(Router);
+export default Router;

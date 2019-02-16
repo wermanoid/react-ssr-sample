@@ -7,7 +7,7 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import JssProvider from 'react-jss/lib/JssProvider';
 
-import Application from '#shared/Router';
+import Application from '#shared/App';
 
 class Main extends React.Component {
   public componentDidMount() {

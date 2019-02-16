@@ -7,7 +7,7 @@ import { SheetsRegistry } from 'jss';
 import React from 'react';
 import JssProvider from 'react-jss/lib/JssProvider';
 
-import Application from '#shared/Router';
+import Application from '#shared/App';
 
 export const renderApp = () => {
   // Create a sheetsRegistry instance.

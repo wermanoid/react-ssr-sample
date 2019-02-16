@@ -97,7 +97,7 @@ const start = async () => {
     ...require('../nodemon.json'),
     script: `${build.server}/index.js`,
     ignore: ['src', 'scripts', 'config', './*.*', 'dist/client'],
-    watch: [build.server],
+    watch: [`${build.server}/index.js`],
   });
 
   script.on('restart', () => {

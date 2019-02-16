@@ -2,6 +2,8 @@ module.exports = (api) => {
   api.cache(true);
 
   return {
+    ignore: ['node_modules'],
+    compact: true,
     presets: [
       [
         '@babel/env',
@@ -16,6 +18,7 @@ module.exports = (api) => {
       '@babel/react',
     ],
     plugins: [
+      'emotion',
       [
         'transform-imports',
         {
@@ -37,17 +40,14 @@ module.exports = (api) => {
       ['@babel/transform-runtime', { corejs: 2 }],
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
+      '@babel/plugin-syntax-dynamic-import',
     ],
-    ignore: ['node_modules'],
     env: {
       production: {
         plugins: ['closure-elimination'],
       },
-      server: {
-        plugins: ['dynamic-import-node'],
-      },
-      client: {
-        plugins: ['dynamic-import-webpack'],
+      development: {
+        plugins: [['emotion', { sourceMap: true }]],
       },
     },
   };
