@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { css, Global, jsx } from '@emotion/core';
+import { css, Global } from '@emotion/core';
 // import { Button } from '@material-ui/core';
 // import { throttle } from 'lodash/fp';
 
@@ -69,4 +68,9 @@ const App = () => (
   </Layout>
 );
 
-export default hot(App);
+let Apppp = App;
+if (process.env.NODE_ENV !== 'production') {
+  Apppp = hot(App);
+}
+
+export default Apppp;

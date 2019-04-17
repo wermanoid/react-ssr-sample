@@ -36,5 +36,5 @@ hydrate(
       <Main />
     </MuiThemeProvider>
   </JssProvider>,
-  document.getElementById('react-root'),
+  document.getElementById('react-root')
 );

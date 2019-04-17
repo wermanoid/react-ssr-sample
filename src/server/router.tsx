@@ -7,10 +7,10 @@ import { renderApp } from './renderer';
 
 const getScriptsTags = pipe(
   map(
-    (file) =>
-      `<script defer type="application/javascript" src="${file}"></script>`,
+    file =>
+      `<script defer type="application/javascript" src="${file}"></script>`
   ),
-  join(''),
+  join('')
 );
 
 export default async (req: Request, res: Response, next: NextFunction) => {
@@ -39,7 +39,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   const stream = renderToNodeStream(app);
   stream.pipe(
     res,
-    { end: false },
+    { end: false }
   );
   stream.on('end', () => {
     res.end(`</div>

@@ -1,4 +1,4 @@
-module.exports = (api) => {
+module.exports = api => {
   api.cache(true);
 
   return {
@@ -8,17 +8,26 @@ module.exports = (api) => {
       [
         '@babel/env',
         {
+          useBuiltIns: 'usage',
+          corejs: 2,
           targets: {
             browsers: 'Last 2 Chrome versions, Firefox ESR',
-            node: '8.12',
+            node: '8.14',
           },
         },
       ],
       '@babel/typescript',
-      '@babel/react',
+      ['@babel/react', { development: process.env.NODE_ENV !== 'production' }],
+      [
+        '@emotion/babel-preset-css-prop',
+        {
+          autoLabel: true,
+          labelFormat: '[local]',
+        },
+      ],
     ],
     plugins: [
-      'emotion',
+      'react-hot-loader/babel',
       [
         'transform-imports',
         {

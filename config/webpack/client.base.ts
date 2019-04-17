@@ -8,7 +8,7 @@ export default {
   name: 'client',
   target: 'web',
   entry: {
-    client: ['@babel/polyfill', path.resolve(project.srcClient, 'index.tsx')],
+    client: [path.resolve(project.srcClient, 'index.tsx')],
   },
   output: {
     path: project.clientBuild,

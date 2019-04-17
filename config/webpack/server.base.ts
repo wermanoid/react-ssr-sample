@@ -10,7 +10,7 @@ export default {
   name: 'server',
   target: 'node',
   entry: {
-    server: ['@babel/polyfill', path.resolve(project.srcServer, 'index.ts')],
+    server: [path.resolve(project.srcServer, 'index.ts')],
   },
   externals: [nodeExternals()],
   output: {
