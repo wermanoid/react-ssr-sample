@@ -4,7 +4,6 @@ import {
   MuiThemeProvider,
 } from '@material-ui/core/styles';
 import { SheetsRegistry } from 'jss';
-import React from 'react';
 import JssProvider from 'react-jss/lib/JssProvider';
 
 import Application from '#shared/App';

@@ -1,4 +1,5 @@
-import { css, Global } from '@emotion/core';
+/** @jsx jsx */
+import { css, Global, jsx } from '@emotion/core';
 // import { Button } from '@material-ui/core';
 // import { throttle } from 'lodash/fp';
 

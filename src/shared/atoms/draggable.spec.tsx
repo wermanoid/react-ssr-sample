@@ -1,13 +1,12 @@
-import { mount } from 'enzyme';
-import React from 'react';
-import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import styled from '@emotion/styled';
+import { mount } from 'enzyme';
 
 import Draggable from './draggable';
 
 const Btn = styled.button<{ width: number }>`
   color: red;
-  ${props => css`
+  ${(props: { width: number }) => css`
     width: ${props.width};
   `};
 `;

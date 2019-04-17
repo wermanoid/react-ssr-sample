@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { join, map, pipe } from 'lodash/fp';
-// import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
 
 import { renderApp } from './renderer';

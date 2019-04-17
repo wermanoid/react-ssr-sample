@@ -8,7 +8,7 @@ module.exports = api => {
         '@babel/env',
         {
           useBuiltIns: 'usage',
-          corejs: 2,
+          corejs: 3,
           targets: {
             browsers: 'Last 2 Chrome versions, Firefox ESR',
             node: '8.14',
@@ -45,7 +45,7 @@ module.exports = api => {
         },
       ],
       ['webpack-alias', { config: './config/webpack/resolvers.js' }],
-      ['@babel/transform-runtime', { corejs: 2 }],
+      ['@babel/transform-runtime', { corejs: 3 }],
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       '@babel/plugin-syntax-dynamic-import',
