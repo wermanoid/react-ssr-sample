@@ -1,8 +1,7 @@
 module.exports = api => {
   api.cache(true);
-
   return {
-    ignore: ['node_modules'],
+    sourceType: 'unambiguous',
     compact: true,
     presets: [
       [

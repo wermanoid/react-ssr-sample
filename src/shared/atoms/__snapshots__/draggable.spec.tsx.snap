@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sample sjoudl 1`] = `
+.emotion-2 {
+  background: rgba(255,255,255,0.4);
+}
+
+.emotion-0 {
+  color: red;
+  width: 234;
+}
+
+<Draggable
+  id="324"
+  render="div"
+>
+  <div
+    draggable={true}
+    onDragStart={[Function]}
+  >
+    <Sample>
+      <div
+        className="emotion-2"
+      >
+        <Btn
+          width={234}
+        >
+          <button
+            className="emotion-0 emotion-1"
+            width={234}
+          >
+            lol
+          </button>
+        </Btn>
+      </div>
+    </Sample>
+  </div>
+</Draggable>
+`;
