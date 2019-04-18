@@ -5,14 +5,19 @@
 // IMPORTANT
 // When you add this file, we won't add the default configurations which is similar
 // to "React Create App". This only has babel loader to load JavaScript.
+const resolver = require('../config/webpack/resolvers');
 
-module.exports = {
+module.exports = Object.assign({}, resolver, {
   plugins: [
     // your custom plugins
   ],
   module: {
     rules: [
-      // add your custom rules.
+      {
+        test: /.tsx?$/,
+        loader: 'awesome-typescript-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
-};
+});
